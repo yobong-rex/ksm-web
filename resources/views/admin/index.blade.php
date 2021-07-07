@@ -32,18 +32,18 @@
                                 @php($x=1);
                                 @foreach($pendaftar as $p)
                                     <tr>
-                                        <td>{{$x}}</td>
-                                        <td>{{$p->nama}}</td>
-                                        <td>{{$p->email}}</td>
-                                        <td>{{$p->nrp}}</td>
-                                        <td>{{$p->jurusan}}</td>
-                                        <td>{{$p->angkatan}}</td>
-                                        <td>{{$p->nohp_whatsapp}}</td>
-                                        <td>{{$p->waktu}}</td>
-                                        <form action="/admin/hapus" method="post">
-                                        @csrf
-                                            <td><button id="hapus" value="{{$p->id}}" name="hapus" class="btn btn-danger">Hapus</button></td>
-                                        </form>
+                                    <td>{{$x}}</td>
+                                    <td>{{$p->nama}}</td>
+                                    <td>{{$p->email}}</td>
+                                    <td>{{$p->nrp}}</td>
+                                    <td>{{$p->jurusan}}</td>
+                                    <td>{{$p->angkatan}}</td>
+                                    <td>{{$p->nohp_whatsapp}}</td>
+                                    <td>{{$p->waktu}}</td>
+                                    <form action="/admin/hapus" method="post">
+                                    @csrf
+                                        <td><button id="hapus" value="{{$p->id}}" name="hapus" class="btn btn-danger">Hapus</button></td>
+                                    </form>
                                     </tr>
                                     @php($x++);
                                 @endforeach
