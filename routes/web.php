@@ -22,7 +22,7 @@ Route::get('/pendaftaran',function(){
 })->name('pendaftaran');
 Route::post('/pendaftaran/ok','pendaftaranControllers@Pendaftaran')->name('pendaftaranOk');
 
-Route::get('/admin','pendaftaranControllers@listPendaftar')->name('listpendaftaran')->middleware('auth');
+Route::get('/admin','AdminController@dashboard')->name('dashboard')->middleware('auth');
 Route::post('/admin/hapus','pendaftaranControllers@hapus')->name('hapus');
 
 //download csv

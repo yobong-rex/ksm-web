@@ -11,52 +11,52 @@ class pendaftaranControllers extends Controller
 {
     //untuk pendaftaran
     public function Pendaftaran(Request $request){
-        $now =  Carbon::now();
-        $nama = $request->get('nama');
-        $email = $request->get('email');
-        $nrp = $request->get('nrp');
-        // $jurusan = $request->get('jurusan');
-        // $angkatan = $request->get('angkatan');
-        $jurusan = '';
-        $angkatan = '';
-        $jurusanOther = $request->get('jurusanOther');
-        $angkatanOther = $request->get('angkatanOther');
-        $whatsapp = $request->get('whatsapp');
+    //     $now =  Carbon::now();
+    //     $nama = $request->get('nama');
+    //     $email = $request->get('email');
+    //     $nrp = $request->get('nrp');
+    //     // $jurusan = $request->get('jurusan');
+    //     // $angkatan = $request->get('angkatan');
+    //     $jurusan = '';
+    //     $angkatan = '';
+    //     $jurusanOther = $request->get('jurusanOther');
+    //     $angkatanOther = $request->get('angkatanOther');
+    //     $whatsapp = $request->get('whatsapp');
 
-        if($jurusanOther == ""){
-            $jurusan = $request->get('jurusan');
-        }
-        else{
-            $jurusan = $jurusanOther;
-        }
+    //     if($jurusanOther == ""){
+    //         $jurusan = $request->get('jurusan');
+    //     }
+    //     else{
+    //         $jurusan = $jurusanOther;
+    //     }
 
-        if($angkatanOther == ""){
-            $angkatan = $request->get('angkatan');
-        }
-        else{
-            $angkatan = $angkatanOther;
-        }
-        $insert= DB::table('pendaftaran')->insert([
-            'nama'=>$nama,
-            'email'=>$email,
-            'nrp'=>$nrp,
-            'jurusan'=>$jurusan,
-            'angkatan'=>$angkatan,
-            'nohp_whatsapp'=>$whatsapp,
-            'waktu'=>$now
-        ]);
-        return redirect()->route('pendaftaran')->with('status','Pendaftaran berhasil');
-    }
+    //     if($angkatanOther == ""){
+    //         $angkatan = $request->get('angkatan');
+    //     }
+    //     else{
+    //         $angkatan = $angkatanOther;
+    //     }
+    //     $insert= DB::table('pendaftaran')->insert([
+    //         'nama'=>$nama,
+    //         'email'=>$email,
+    //         'nrp'=>$nrp,
+    //         'jurusan'=>$jurusan,
+    //         'angkatan'=>$angkatan,
+    //         'nohp_whatsapp'=>$whatsapp,
+    //         'waktu'=>$now
+    //     ]);
+        // return redirect()->route('pendaftaran')->with('status','Pendaftaran berhasil');
+     }
 
     public function listPendaftar(){
-        $data = DB::table('pendaftaran')->get();
-        return view('admin.index',['pendaftar'=>$data]);
+        // $data = DB::table('pendaftaran')->get();
+        return view('admin.index');
     }
 
     public function hapus(Request $request){
-        $id_hapus = $request->get('hapus');
-        $hapus_data = DB::table('pendaftaran')->where('id',$id_hapus)->delete();
-        return redirect()->route('listpendaftaran')->with('status','Peserta berhasil dihapus');
+        // $id_hapus = $request->get('hapus');
+        // $hapus_data = DB::table('pendaftaran')->where('id',$id_hapus)->delete();
+        // return redirect()->route('listpendaftaran')->with('status','Peserta berhasil dihapus');
     }
 
     // public function csv(){

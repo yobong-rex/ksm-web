@@ -11,40 +11,29 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- CSS -->
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="/assets/vendor/nucleo/css/nucleo-icons.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link type="text/css" href="/assets/css/blk-design-system.min.css" rel="stylesheet">
+
+    <!-- JS -->
+    <!-- Core -->
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/vendor/popper/popper.min.js"></script>
+    <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Theme JS -->
+    <script src="/assets/js/blk-design-system.min.js"></script>
+    
     @yield('Javascript')
 
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-
-    <!-- Material Kit CSS -->
-    <link href="{{url('/assets_template/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
-
-    <link href="{{asset( '/assets/css/bootstrap-4.0.0/dist/css/bootstrap.css' ) }}" rel="stylesheet" type="text/css">
-	<link href="{{asset( '/assets/css/style.css' ) }}" rel="stylesheet" type="text/css">
-	<link href="{{asset( '/assets/css/responsive.css' ) }}" rel="stylesheet" type="text/css">
-	<link href="{{asset( '/assets/css/animate.css' ) }}" rel="stylesheet" type="text/css">
-	<link href="{{asset( '/assets/css/fontawesome-5.3.1/css/all.css' ) }}" rel="stylesheet" type="text/css">
-
-    <style>
-    .card-dash {
-        transition: 0.4s;
-    }
-
-    .card-dash:hover {
-        transform: scale(1.1);
-        cursor: pointer; 
-    }
-    </style>
+    
 </head>
 <body>
 <div class="sidebar" data-color="orange" data-background-color="white">
