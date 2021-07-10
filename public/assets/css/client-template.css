@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.wrapper {
+    margin: 0;
+    padding: 0;
+}
+
+/* CSS Layout Header */
+header {
+    padding: 100px 0;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-logo {
+    width: 500px;
+    margin: auto;
+}
+
+.header-text {
+    font-size: 48px;
+    margin: 30px;
+    margin-top: 50px;
+}
+
+.header-motto {
+    font-size: 36px;
+    margin: 30px;
+}
+
+.btn-get-started {
+    font-size: 20px;
+    margin: 30px 0 0;
+}
+
+/* CSS Layout Header Responsive */
+@media screen and (max-width: 700px) {
+    header { height: 100vh; box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2); display: flex; align-items: center; }
+    .header-logo { width: 70%; }
+    .header-text { font-size: 24px; }
+    .header-motto { font-size: 20px; }
+    .btn-get-started { font-size: 16px; }
+}
+
+/* CSS Layout Navigation */
+nav {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.navigation-list {
+    margin: auto;
+    font-size: 20px;
+}
+
+.navigation-list > li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-brand { 
+    display: none;
+}
+
+/* CSS Layout Navigation Responsive */
+@media screen and (max-width: 700px) {
+    #navigation-bar {
+        top: 0;
+        margin: 0;
+        position: sticky;
+    }
+
+    .navbar-brand { display: block;}
+}
