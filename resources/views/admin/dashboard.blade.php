@@ -130,7 +130,7 @@
     <div class="modal fade" id="modaledit" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form role="form" method='POST' action="/admin/tambah">
+                <form role="form" method='POST' action="/admin/edit">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Tambah Acara</h4>
@@ -138,7 +138,7 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-body">
-                            <input type="hidden" id='id_acara'>
+                            <input type="hidden" id='id_acara' name="id_acara">
                              <div class="form-group">
                                 <label>Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama" required>
@@ -177,11 +177,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label> <br>
-                                <textarea rows="4" cols="50" name="deskripsi" required> </textarea>
+                                <textarea rows="4" cols="50" name="deskripsi" id='deskripsi' required> </textarea>
                             </div>
                             <div class="form-group">
                                 <label>Galeri</label>
-                                <textarea rows="4" cols="50" name="deskripsi_galeri" id="galeri" required> </textarea>
+                                <textarea rows="4" cols="50" name="deskripsi_galeri" id="galeri" > </textarea>
                             </div>
                         </div>
 
@@ -210,32 +210,31 @@
 
 					$.each(data.list, function(key,value){
                         $('#id_acara').val(data.list[key].id);
-                        var mulai = data.list[key].tanggal_mulai.toString('yyyy-MM-dd hh:mm');
-                        $('#nama').val(mulai);
-                        
-                        $('#tanggal_mulai').val(mulai);
-                        $('#tanggal_selesai').val(data.list[key].tanggal_akhir);
+                        $('#nama').val(data.list[key].nama);
+                        $('#tanggal_mulai').val(data.mulai);
+                        $('#tanggal_selesai').val(data.selesai);
                         if(data.list[key].eksternal == 0){
-                            $('#internal').prop("checked");
+                            $('#internal').prop("checked", true);
                         }
                         else{
-                            $('#eksternal').prop("checked");
+                            $('#eksternal').prop("checked", true);
                         }
                         if(data.list[key].daftar == 0){
-                            $('#close').prop("checked");
+                            $('#close').prop("checked", true);
                         }
                         else{
-                            $('#open').prop("checked");
+                            $('#open').prop("checked", true);
                         }
                         if(data.list[key].selesai == 0){
-                            $('#progress').prop("checked");
+                            $('#progress').prop("checked", true);
                         }
                         else{
-                            $('#finish').prop("checked");
+                            $('#finish').prop("checked", true);
                         }
-                        $('poster').val(data.list[key].link_gambar);
-                        $('link_grup').val(data.list[key].link_grup);
-                        $('galeri').val(data.list[key].deskripsi_galeri);
+                        $('#poster').val(data.list[key].link_gambar);
+                        $('#link_grup').val(data.list[key].link_grup);
+                        $('#deskripsi').val(data.list[key].deskripsi)
+                        $('#galeri').val(data.list[key].deskripsi_galeri);
                     });
 				}
 				});

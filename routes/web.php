@@ -25,6 +25,7 @@ Route::post('/pendaftaran/ok','pendaftaranControllers@Pendaftaran')->name('penda
 
 Route::get('/admin','AdminController@dashboard')->name('dashboard')->middleware('auth');
 Route::post('/admin/tambah','AdminController@tambahAcara')->name('tambah');
+Route::post('/admin/edit','AdminController@editAcara')->name('edit');
 Route::post('/admin/ambil','AdminController@ambilAcara')->name('ambilacara');
 Route::post('/admin/hapus','pendaftaranControllers@hapus')->name('hapus');
 
