@@ -39,7 +39,7 @@ header {
 }
 
 /* CSS Layout Header Responsive */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
     header { height: 100vh; box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2); display: flex; align-items: center; }
     .header-logo { width: 70%; }
     .header-text { font-size: 24px; }
@@ -63,17 +63,96 @@ nav {
     margin-right: 10px;
 }
 
-.navbar-brand { 
+.navbar-brand, .side-navigation { 
     display: none;
 }
 
 /* CSS Layout Navigation Responsive */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
     #navigation-bar {
         top: 0;
         margin: 0;
-        position: sticky;
     }
 
     .navbar-brand { display: block;}
+    
+    .navigation-wrapper {
+        display: none;
+    }
+
+    .side-navigation {
+        display: block;
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
+    .side-nav-list {
+        list-style: none;
+        padding: 0;
+    }
+      
+    .side-nav-list > .nav-item {
+        padding: 10px;
+    }
+
+    .side-nav-list > .nav-item > .nav-link {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .btn-close {
+        margin: 30px 0 10px 20px;
+    }
+}
+
+/* CSS Layout Footer */
+.footer-wrapper {
+    padding: 30px 0;
+    line-height: 2.5em;
+}
+
+.footer-section {
+    font-size: 18px;
+}
+
+.social-media-icon {
+    width: 50px;
+    margin: 10px 0 10px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .social-media-icon {
+        margin: 10px 20px 10px 0;
+    }
+
+    #copyright {
+        font-size: 1rem;
+    }
+
+    .footer-content-header {
+        font-size: 1.3rem;
+    }
+
+    .footer-wrapper {
+        padding: 30px 0;
+        line-height: 2.2em;
+    }
+
+    .footer-content-text {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #copyright {
+        font-size: 0.7rem;
+    }
 }
