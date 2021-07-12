@@ -35,7 +35,7 @@
 
                     <div class="header-motto font-weight-bold font-italic text-white">WE NOT ME</div>
 
-                    <div><a href="#navigation-bar"><button type="button" class="btn btn-primary font-weight-bold btn-get-started">GET STARTED</button></a></div>
+                    <div><a href="#navigation-bar"><button type="button" class="btn btn-primary font-weight-bold btn-get-started d-none" id="get-started">MULAI</button></a></div>
                 </div>
             </header>
 
@@ -55,19 +55,16 @@
                     <div class="collapse navbar-collapse navigation-wrapper" id="navbarTogglerDemo02">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navigation-list">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Beranda</a>
+                                <a class="nav-link" href="{{ route('beranda') }}">Beranda</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#struktur-organisasi">Struktur Organisasi</a>
+                                <a class="nav-link" href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#acara">Acara</a>
+                                <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#galeri">Galeri</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#lsta-bursa">LSTA & BURSA</a>
+                                <a class="nav-link" href="{{ route('lsta-bursa') }}">LSTA & BURSA</a>
                             </li>
                         </ul>
                     </div>
@@ -78,19 +75,16 @@
                         
                         <ul class="mr-auto mt-2 mt-lg-0 side-nav-list">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Beranda</a>
+                                <a class="nav-link" href="{{ route('beranda') }}">Beranda</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#struktur-organisasi">Struktur Organisasi</a>
+                                <a class="nav-link" href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#acara">Acara</a>
+                                <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#galeri">Galeri</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#lsta-bursa">LSTA & BURSA</a>
+                                <a class="nav-link" href="{{ route('lsta-bursa') }}">LSTA & BURSA</a>
                             </li>
                         </ul>
                     </div>
@@ -132,8 +126,6 @@
 
                             <div class="col-12 col-sm-12 col-md-6 order-1 order-sm-1 order-md-4 text-center text-sm-center text-md-right p-3 p-sm-3 p-md-5">
                                 <img src="{{ asset('assets/img/ksm-putih.png') }}" alt="logo-footer" class="logo-footer w-50">
-                                <!-- <div class="clearfix"></div> -->
-                                <!-- <div class="mt-3 text-center w-md-50 bg-primary" id="easter-egg"></div> -->
                                 <div class="row">
                                     <div class="col-0 col-sm-0 col-md-6"></div>
                                     <div class="col-12 col-sm-12 col-md-6 text-center" id="easter-egg">:)</div>

@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['register'=>false]);
-Route::get('/', 'MainController@index')->name('main-page');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'MainController@beranda')->name('beranda');
+Route::get('/struktur-organisasi', 'MainController@strukturOrganisasi')->name('struktur-organisasi');
+Route::get('/acara', 'MainController@acara')->name('acara');
+Route::get('/galeri', 'MainController@galeri')->name('galeri');
+Route::get('/lsta-bursa', 'MainController@lstaBursa')->name('lsta-bursa');
+
 
 Route::get('/pendaftaran',function(){
     return view('pendaftaran.index');
@@ -23,9 +29,10 @@ Route::get('/pendaftaran',function(){
 
 Route::post('/pendaftaran/ok','pendaftaranControllers@Pendaftaran')->name('pendaftaranOk');
 
-Route::get('/admin','AdminController@dashboard')->name('dashboard')->middleware('auth');
 Route::post('/admin/tambah','AdminController@tambahAcara')->name('tambah');
 Route::post('/admin/edit','AdminController@editAcara')->name('edit');
+Route::get('/admin/acara','AdminController@acara')->name('acara')->middleware('auth');
+Route::get('/admin/peserta','AdminController@peserta')->name('peserta')->middleware('auth');
 Route::post('/admin/ambil','AdminController@ambilAcara')->name('ambilacara');
 Route::post('/admin/hapus','pendaftaranControllers@hapus')->name('hapus');
 

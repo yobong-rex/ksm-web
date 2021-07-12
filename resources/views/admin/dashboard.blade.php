@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <button href="" data-toggle="modal" type="button" class="btn btn-info" data-target="#modaltambahrd">Tambah Baru</button><br><br>
-            <table class="table table-paginate" cellspacing="0" width="100%">
+            <table class="table table-paginate" id="table_id" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th scope="col">Nomer</th>
@@ -196,6 +196,10 @@
     </div>
 
     <script>
+       $(document).ready( function () {
+           alert('dor');
+            $('#table_id').DataTable();
+        } );
         function ubah(id){
             var id = id;
             

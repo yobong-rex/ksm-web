@@ -7,9 +7,9 @@ use DB;
 
 class AdminController extends Controller
 {
-    public function dashboard(){
+    public function acara(){
         $data = DB::table('acaras')->get();
-        return view('admin.dashboard',['acara'=>$data]);
+        return view('admin.acara',['acara'=>$data]);
     }
     public function tambahAcara(Request $request){
         $nama = $request->get('nama');
@@ -22,7 +22,7 @@ class AdminController extends Controller
 
         $insert=DB::table('acaras')
                 ->insert(['nama'=>$nama,'tanggal_mulai'=>$tanggal_mulai,'tanggal_akhir'=>$tanggal_selesai,'eksternal'=>$tipe,'link_gambar'=>$poster,'deskripsi'=>$deskripsi,'link_grup'=>$link_grup]);
-            return redirect()->route('dashboard')
+            return redirect()->route('acara')
             ->with('status','Acara Berhasil Ditambah');
     }
     public function ambilAcara(Request $request){
@@ -63,7 +63,12 @@ class AdminController extends Controller
                               'link_gambar'=>$poster,
                               'deskripsi'=>$deskripsi,
                               'deskripsi_galeri'=>$deskripsi_galeri]);
-        return redirect()->route('dashboard')
+        return redirect()->route('acara')
         ->with('status','Acara Berhasil Diubah');
+    }
+
+    public function peserta(){
+        $data = DB::table('acaras')->get();
+        return view('admin.peserta',['acara'=>$data]);
     }
 }

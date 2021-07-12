@@ -18,6 +18,15 @@
     <!-- Icons -->
     <link href="/assets/vendor/nucleo/css/nucleo-icons.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    
+    <!-- untuk table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+  
+  
+  
+
+
 
     <!-- Theme CSS -->
     <link type="text/css" href="/assets/css/blk-design-system.min.css" rel="stylesheet">
@@ -87,5 +96,6 @@
     <script>
 
     </script>
+    
 </body>
 </html>
