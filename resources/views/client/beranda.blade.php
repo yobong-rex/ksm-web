@@ -34,29 +34,13 @@
                         <div class="display-3 mb-4 mb-sm-4 mb-md-5 header-beranda">Struktur Organisasi</div>
                     </div>
 
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
-                        <div><img src="{{ asset('assets/img/foto_anggota/siesta.jpg') }}" alt="ketua-ksm" class="w-75"></div>
-                        <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">Siesta</div>
-                        <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">Ketua KSM IF</div>
-                    </div>
-
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
-                        <div><img src="{{ asset('assets/img/foto_anggota/kimizuka.jpg') }}" alt="wakil-ketua-ksm" class="w-75"></div>
-                        <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">Kimizuka</div>
-                        <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">Wakil Ketua KSM IF</div>
-                    </div>
-
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
-                        <div><img src="{{ asset('assets/img/foto_anggota/nagisa.jpg') }}" alt="sekretaris-ksm" class="w-75"></div>
-                        <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">Nagisa</div>
-                        <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">Sekretaris KSM IF</div>
-                    </div>
-
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
-                        <div><img src="{{ asset('assets/img/foto_anggota/yui.jpg') }}" alt="bendahara-ksm" class="w-75"></div>
-                        <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">Yui</div>
-                        <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">Bendahara KSM IF</div>
-                    </div>
+                    @foreach ($pengurus as $p)
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
+                            <div><img src="{{ asset('assets/img/foto_anggota/'.$p->foto_profil.'') }}" alt="{{ $p->nama_jabatan }} KSM IF" class="w-75"></div>
+                            <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">{{ $p->nama }}</div>
+                            <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ $p->nama_jabatan }} KSM IF</div>
+                        </div>
+                    @endforeach
 
                     <div class="col-12 text-center p-4">
                         <a href="{{ route('struktur-organisasi') }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px">LIHAT SELENGKAPNYA</a>
@@ -74,8 +58,32 @@
                         <div class="display-3 mb-5 header-beranda">Acara</div>
                     </div>
 
-                    @for($i = 1; $i <= 8; $i++)
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                    <!-- Blade acara -->
+                    @foreach ($acara as $a)
+                        <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-4 acara-card p-3">
+                            <div class="card w-100 h-100 m-0">
+                                <img class="card-img-top" src="{{ asset('assets/img/event/'.$a->link_gambar.'') }}" alt="{{ str_replace(' ', '-', strtolower($a->nama)) }}">
+                                <div class="card-body p-4">
+                                    <div class="card-title mb-3 mt-2 h3 font-weight-bold event-header">{{ $a->nama }}</div>
+                                    <p class="card-text h4 event-text">{{ $a->deskripsi }}</p>
+
+                                    <div class="mt-4" style="margin-bottom: 80px !important">
+                                        <img src="{{ asset('assets/img/kalender.png') }}" alt="kalender" class="kalender-icon">
+                                        <span class="ml-2 font-weight-bold event-text">{{ $a->tanggal_acara }}</span>
+                                    </div>
+
+                                    @if ($a->daftar)
+                                        <a href="/acara/{{ str_replace(' ', '-', strtolower($a->nama)) }}" class="btn btn-primary font-weight-bold btn-daftar ml-4">DAFTAR</a>
+                                    @else
+                                        <a class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">DAFTAR</a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    <!-- @for($i = 1; $i <= 8; $i++)
+                    <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-4 acara-card">
                         <div class="card w-100">
                             <img class="card-img-top" src="{{ asset('assets/img/event/event1.jpg') }}" alt="event-ksm">
                             <div class="card-body p-4">
@@ -85,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    @endfor
+                    @endfor -->
                 </div>
             </div>
         </div>

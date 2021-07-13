@@ -112,16 +112,16 @@
                             <div class="col-12 col-sm-12 col-md-6 order-4 order-sm-4 order-md-2 text-left text-sm-left text-md-right p-3 p-sm-3 p-md-5">
                                 <div class="h3 font-weight-bold text-white footer-content-header">Sosial Media</div>
                                 <div>
-                                    <a href="https://www.youtube.com/channel/UCkIk0gaY-TXMfdTHpFGZJAw" target="_blank"><img src="{{ asset('assets/img/sosial_media/youtube.png') }}" alt="youtube" class="social-media-icon"></a>
-                                    <a href="https://wa.me/6281353067152" target="_blank"><img src="{{ asset('assets/img/sosial_media/whatsapp.png') }}" alt="whatsapp" class="social-media-icon"></a>
-                                    <a href="https://line.me/ti/p/@rvy2022m" target="_blank"><img src="{{ asset('assets/img/sosial_media/line.png') }}" alt="line" class="social-media-icon"></a>
-                                    <a href="https://www.instagram.com/ksm_informatika/" target="_blank"><img src="{{ asset('assets/img/sosial_media/instagram.png') }}" alt="instagram" class="social-media-icon"></a>
+                                    <a href="{{ $info->youtube }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/youtube.png') }}" alt="youtube" class="social-media-icon"></a>
+                                    <a href="{{ $info->whatsapp }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/whatsapp.png') }}" alt="whatsapp" class="social-media-icon"></a>
+                                    <a href="{{ $info->line }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/line.png') }}" alt="line" class="social-media-icon"></a>
+                                    <a href="{{ $info->instagram }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/instagram.png') }}" alt="instagram" class="social-media-icon"></a>
                                 </div>
                             </div>
 
                             <div class="col-12 col-sm-12 col-md-6 order-3 order-sm-3 order-md-3 text-left p-3 p-sm-3 p-md-5">
                                 <div class="h3 font-weight-bold text-white footer-content-header">Email</div>
-                                <div class="footer-content-text">ksm.if.ubaya@gmail.com</div>
+                                <div class="footer-content-text">{{ $info->email }}</div>
                             </div>
 
                             <div class="col-12 col-sm-12 col-md-6 order-1 order-sm-1 order-md-4 text-center text-sm-center text-md-right p-3 p-sm-3 p-md-5">
@@ -135,7 +135,7 @@
 
                         <div class="row footer-section">
                             <div class="col-12 text-white h4 text-center p-4" id="copyright">
-                                Copyright ©2021 | KSM Informatika Universitas Surabaya
+                                Copyright ©<span class="copyright-year"></span> | KSM Informatika Universitas Surabaya
                             </div>
                         </div>
                     </div>
@@ -146,6 +146,7 @@
             <script>
                 $(document).ready(function() {
                     $('#easter-egg').css('visibility', 'hidden');
+                    $('.copyright-year').text(new Date().getFullYear());
                 });
 
                 $(document).on('mouseover', '.logo-footer', function() {
@@ -157,7 +158,7 @@
                 });
 
                 function openNav() {
-                    $('.side-navigation').css('width', '250px');
+                    $('.side-navigation').css('width', '50vw');
                 }
 
                 function closeNav() {
