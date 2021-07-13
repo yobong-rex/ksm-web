@@ -73,7 +73,7 @@
                                     </div>
 
                                     @if ($a->daftar)
-                                        <a href="/acara/{{ str_replace(' ', '-', strtolower($a->nama)) }}" class="btn btn-primary font-weight-bold btn-daftar ml-4">DAFTAR</a>
+                                        <a href="/acara/{{ str_replace(' ', '-', strtolower($a->nama)) }}" class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">DAFTAR</a>
                                     @else
                                         <a class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">DAFTAR</a>
                                     @endif
@@ -81,19 +81,6 @@
                             </div>
                         </div>
                     @endforeach
-
-                    <!-- @for($i = 1; $i <= 8; $i++)
-                    <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-4 acara-card">
-                        <div class="card w-100">
-                            <img class="card-img-top" src="{{ asset('assets/img/event/event1.jpg') }}" alt="event-ksm">
-                            <div class="card-body p-4">
-                                <div class="card-title mb-3 mt-2 h3 font-weight-bold event-header">Seminar ITT</div>
-                                <p class="card-text h4 event-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam laborum quisquam dicta beatae, quis unde ad cum modi hic, nihil rerum consequuntur! Beatae amet nihil esse officiis neque autem qui!</p>
-                                <a href="#" class="btn btn-primary font-weight-bold mt-3">LIHAT DETIL</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endfor -->
                 </div>
             </div>
         </div>
@@ -108,12 +95,12 @@
                         <div class="h3 text-white mb-5 mb-sm-4 mb-md-5 subheader-galeri">Persembahan dari KSM Informatika selama 1 periode</div>
                     </div>
 
-                    @for($i = 1; $i <= 6; $i++)
-                    <div class="col-10 col-sm-10 col-md-5 col-lg-5 col-xl-4 p-0 bg-dark img-gallery">
-                        <img class="rounded-0 img-image" src="{{ asset('assets/img/galeri/galeri1.jpg') }}" alt="event-ksm">
-                        <div class="h3 text-white text-image font-weight-bold">Kegiatan {{ $i }}</div>
-                    </div>
-                    @endfor
+                    @foreach($galeri as $g)
+                        <div class="col-10 col-sm-10 col-md-5 col-lg-5 col-xl-4 p-0 bg-dark img-gallery">
+                            <img class="rounded-0 img-image" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama)).'/'.$g->thumbnail.'') }}" alt="event-ksm">
+                            <div class="h3 text-white text-image font-weight-bold text-center">{{ $g->nama }}</div>
+                        </div>
+                    @endforeach
 
                     <div class="col-12 text-center p-5">
                         <a href="{{ route('galeri') }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px">LIHAT SELENGKAPNYA</a>

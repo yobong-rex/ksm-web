@@ -17,6 +17,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Mulai Pendaftaran</th>
                         <th scope="col">Selesai Pendaftaran</th>
+                        <th scope="col">Tanggal Acara</th>
                         <th scope="col">Tipe</th>
                         <th scope="col">Status Pendaftaran</th>
                         <th scope="col">Status Acara</th>
@@ -51,6 +52,7 @@
                             ?>
                             <td>{{$tanggal_mulai}}</td>
                             <td>{{$tanggal_akhir}}</td>
+                            <td>{{$a->tanggal_acara}}</td>
                             <td>{{$tipe}}</td>
                             <td>{{$pendaftaran}}</td>
                             <td>{{$status}}</td>
@@ -93,6 +95,17 @@
                             <div class="form-group">
                                 <label>Tanggal Selesai Pendaftaran</label>
                                 <input type="datetime-local" class="form-control" id="" name="tanggal-selesai" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Awal Acara</label>
+                                    <input type="date" class="form-control" id="" name="waktu_awal" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Akhir Acara</label>
+                                    <input type="date" class="form-control" id="" name="waktu_akhir" required>
+                                </div>
                             </div>
                             
                            <div class="form-group">
@@ -150,6 +163,17 @@
                             <div class="form-group">
                                 <label>Tanggal Selesai Pendaftaran</label>
                                 <input type="datetime-local" class="form-control" id="tanggal_selesai" name="tanggal_selesai" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Awal Acara</label>
+                                    <input type="date" class="form-control" id="waktu_awal" name="waktu_awal" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Akhir Acara</label>
+                                    <input type="date" class="form-control" id="waktu_akhir" name="waktu_akhir" required>
+                                </div>
                             </div>
                             
                            <div class="form-group">
@@ -211,12 +235,13 @@
 					'id': id
 				},
 				success: function(data){
-
 					$.each(data.list, function(key,value){
                         $('#id_acara').val(data.list[key].id);
                         $('#nama').val(data.list[key].nama);
                         $('#tanggal_mulai').val(data.mulai);
                         $('#tanggal_selesai').val(data.selesai);
+                        $('#waktu_awal').val(data.tanggal_awal);
+                        $('#waktu_akhir').val(data.tanggal_akhir);
                         if(data.list[key].eksternal == 0){
                             $('#internal').prop("checked", true);
                         }

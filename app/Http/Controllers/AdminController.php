@@ -19,22 +19,70 @@ class AdminController extends Controller
         $poster = $request->get('poster');
         $deskripsi = $request->get('deskripsi');
         $link_grup = $request->get('link_grup');
+        $waktu_awal = $request->get('waktu_awal');
+        $waktu_akhir = $request->get('waktu_akhir');
+
+        if($waktu_awal == $waktu_akhir){
+            $waktu = date('j F Y', strtotime($waktu_awal));
+        }
+        else{
+            $split_awal = explode("-",$waktu_awal);
+            $split_akhir = explode("-",$waktu_akhir);
+            
+            if($split_awal[1]==$split_akhir[1]){
+                $bulan = date('F Y', strtotime($waktu_awal));
+                $waktu = $split_awal[2]." - ". $split_akhir[2]." ".$bulan;
+            }
+            else{
+                $awal = date('j F',strtotime($waktu_awal));
+                $waktu = $awal." - ".date('j F Y', strtotime($waktu_akhir));
+            }
+        }
+        // echo $waktu;
 
         $insert=DB::table('acaras')
-                ->insert(['nama'=>$nama,'tanggal_mulai'=>$tanggal_mulai,'tanggal_akhir'=>$tanggal_selesai,'eksternal'=>$tipe,'link_gambar'=>$poster,'deskripsi'=>$deskripsi,'link_grup'=>$link_grup]);
+                ->insert(['nama'=>$nama,'tanggal_mulai'=>$tanggal_mulai,'tanggal_akhir'=>$tanggal_selesai,'eksternal'=>$tipe,'link_gambar'=>$poster,'deskripsi'=>$deskripsi,'link_grup'=>$link_grup,'tanggal_acara'=>$waktu]);
             return redirect()->route('acara')
             ->with('status','Acara Berhasil Ditambah');
     }
     public function ambilAcara(Request $request){
         $id_acara = $request->get('id');
+        // $id_acara = 10;
         $data = DB::table('acaras')->where('id',$id_acara)->get();
         $mulai = date('Y-m-d\TH:i:s', strtotime($data[0]->tanggal_mulai));
         $tutup = date('Y-m-d\TH:i:s', strtotime($data[0]->tanggal_akhir));
+        // $awal = date('Y-m-d', strtotime($data[0]->tanggal_akhir));
         // $mulai = $data[0]->tanggal_mulai;
+
+        $find = '-';
+        $contain = strpos($data[0]->tanggal_acara, $find);
+        
+        if($contain == true){
+            $leng = explode(" ",$data[0]->tanggal_acara);
+            // dd($leng);
+            if(count($leng)>5){
+                $tanggal_awal = $leng[0]."-".$leng[1]."-".$leng[5];
+                $tanggal_akhir = $leng[3]."-".$leng[4]."-".$leng[5];
+            }else{
+                $tanggal_awal = $leng[0]."-".$leng[3]."-".$leng[4];
+                $tanggal_akhir = $leng[2]."-".$leng[3]."-".$leng[4];
+            }
+        }
+        else{
+            $tanggal_awal = $data[0]->tanggal_acara;
+            $tanggal_akhir = $data[0]->tanggal_acara;
+        }
+
+        $awal = date('Y-m-d', strtotime($tanggal_awal));
+        $akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+
         return response()->json(array(
             'list'=> $data,
             'mulai'=>$mulai,
-            'selesai'=>$tutup
+            'selesai'=>$tutup,
+            'tanggal_awal'=>$awal,
+            'tanggal_akhir'=>$akhir
         ),200);
     }
 
@@ -50,6 +98,25 @@ class AdminController extends Controller
         $deskripsi = $request->get('deskripsi');
         $link_grup = $request->get('link_grup');
         $deskripsi_galeri = $request->get('deskripsi_galeri');
+        $waktu_awal = $request->get('waktu_awal');
+        $waktu_akhir = $request->get('waktu_akhir');
+
+        if($waktu_awal == $waktu_akhir){
+            $waktu = date('j F Y', strtotime($waktu_awal));
+        }
+        else{
+            $split_awal = explode("-",$waktu_awal);
+            $split_akhir = explode("-",$waktu_akhir);
+            
+            if($split_awal[1]==$split_akhir[1]){
+                $bulan = date('F Y', strtotime($waktu_awal));
+                $waktu = $split_awal[2]." - ". $split_akhir[2]." ".$bulan;
+            }
+            else{
+                $awal = date('j F',strtotime($waktu_awal));
+                $waktu = $awal." - ".date('j F Y', strtotime($waktu_akhir));
+            }
+        }
 
         $update = DB::table('acaras')
                     ->where('id',$id_acara)
@@ -62,7 +129,8 @@ class AdminController extends Controller
                               'link_grup'=>$link_grup,
                               'link_gambar'=>$poster,
                               'deskripsi'=>$deskripsi,
-                              'deskripsi_galeri'=>$deskripsi_galeri]);
+                              'deskripsi_galeri'=>$deskripsi_galeri,
+                              'tanggal_acara'=>$waktu]);
         return redirect()->route('acara')
         ->with('status','Acara Berhasil Diubah');
     }

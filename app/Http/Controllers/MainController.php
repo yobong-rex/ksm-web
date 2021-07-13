@@ -22,6 +22,19 @@ class MainController extends Controller
                     ->select('nama', 'daftar', 'tanggal_acara', 'link_gambar', 'deskripsi')
                     ->get();
 
+        $daftar_galeri = DB::table('acaras')
+                    ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
+                    ->groupBy('acaras.id', 'acaras.nama')
+                    ->select('acaras.id', 'acaras.nama')
+                    // ->where('selesai', true) // [BUKA COMMENT INI]
+                    ->limit(6)
+                    ->get();
+
+        foreach ($daftar_galeri as $key => $value) {
+            $get_thumbnail = DB::table('galeris')->where('acaras_id', $value->id)->orderBy('id', 'asc')->select('link_gambar')->get();
+            $daftar_galeri[$key]->thumbnail = $get_thumbnail[0]->link_gambar;
+        }
+
         foreach($daftar_acara as $key => $value) {
             $limit_word = 15;
             if (str_word_count($daftar_acara[$key]->deskripsi, 0) > $limit_word) {
@@ -34,7 +47,8 @@ class MainController extends Controller
         return view('client.beranda', [
             'info' => $info_ksm[0],
             'pengurus' => $daftar_pengurus,
-            'acara' => $daftar_acara
+            'acara' => $daftar_acara,
+            'galeri' => $daftar_galeri
         ]);
     }
 
@@ -55,6 +69,12 @@ class MainController extends Controller
 
     // Load halaman lsta & bursa
     function lstaBursa() {
-        return view('client.lsta_bursa');
+        $info_ksm = DB::table('info_ksms')->get();
+        $bursa_soal = DB::table('bursa_soals')->where('id', 1)->get();
+
+        return view('client.lsta_bursa', [
+            'info' => $info_ksm[0],
+            'bursa' => $bursa_soal[0]
+        ]);
     }
 }
