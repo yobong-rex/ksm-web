@@ -1,101 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin KSM</title>
-    <!-- <link rel="icon" href="{{url('assets/icon.png')}}"> -->
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Template Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/metisMenu.css') }}">
+        
+        <!-- Start datatable css -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+        
+        <!-- style css -->
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/typography.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/default-css.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/responsive.css') }}">
+        
+        <!-- modernizr css -->
+        <script src="asset('assets/asset_admin//js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    </head>
 
-    <!-- Icons -->
-    <link href="/assets/vendor/nucleo/css/nucleo-icons.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    
-    <!-- untuk table -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-  
-  
-  
-
-
-
-    <!-- Theme CSS -->
-    <link type="text/css" href="/assets/css/blk-design-system.min.css" rel="stylesheet">
-
-    <!-- JS -->
-    <!-- Core -->
-    <script src="/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/assets/vendor/popper/popper.min.js"></script>
-    <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Theme JS -->
-    <script src="/assets/js/blk-design-system.min.js"></script>
-    
-    @yield('Javascript')
-
-    
-</head>
-<body>
-<div class="sidebar" data-color="orange" data-background-color="white">
-    <!--
-    Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-    Tip 2: you can also add an image using data-image tag -->
-    <div class="logo">
-        <img class="small-logo" src="{{asset( '/assets/img/logo-ksmif.png' ) }}" width=100%>
-    </div>
-    
-    <div class="sidebar-wrapper">
-    <ul class="nav">
-        <li class="nav-item" id="cek-pendaftaran">
-            <a class="nav-link" href="">
-                <i class="material-icons">dvr</i>
-                <p>Cek Pendaftaran</p>
-            </a>
-        </li>
-        <!-- end of sidebar -->
-    </ul>
-    </div>
-</div>
-<div class="wrapper">
-    <!-- Sidebar Navigation -->
-
-    <div class="main-panel">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-            <div class="container-fluid">
-                <div class="navbar-wrapper ml-3">
-                    Cek Pendaftaran
+    <body>
+        <!-- page container area start -->
+        <div class="page-container">
+            <!-- sidebar menu area start -->
+            <div class="sidebar-menu">
+                <div class="sidebar-header">
+                    <div class="logo">
+                        <a href="index.html"><img src="" alt="logo"></a>
+                    </div>
                 </div>
-                <div class="collapse navbar-collapse justify-content-end">
-                   <span class="h4 text-capitalize fw-bold mr-3">{{Auth::user()->name}}</span>
-                   <span class="h4 text-capitalize fw-bold mr-4 bg-primary p-2 pr-4 pl-4" style="border-radius: 20px"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-light"> {{ __('Logout') }}</a></span>
-                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                <div class="main-menu">
+                    <div class="menu-inner">
+                        <nav>
+                            <ul class="metismenu" id="menu">
+                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Manage Acara</span></a></li>
+                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Manage Struktur</span></a></li>
+                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>List Peserta</span></a></li>
+                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Gallery Acara</span></a></li>
+                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Info KSM</span></a></li>
+                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Bursa Soal</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </nav>
-        <!-- End Navbar -->
-        <div class="content">
-            <div class="container-fluid">
+            <!-- sidebar menu area end -->
 
-        @yield('content')
+            <!-- main content area start -->
+            <div class="main-content">
+                <div class="main-content-inner">
+                    @yield('content')
                 </div>
             </div>
+            <!-- main content area end -->
+
+            <!-- footer area start-->
+            <footer>
+                <div class="footer-area">
+                    <p>Copyright ©<span class="copyright-year"></span> | KSM Informatika Universitas Surabaya</p>
+                </div>
+            </footer>
+            <!-- footer area end-->
         </div>
-    </div>
-    <script src="../js/app.js"></script>
-    <script>
+        <!-- page container area end -->
+        
+        <!-- jquery latest version -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    </script>
-    
-</body>
+        <!-- bootstrap 4 js -->
+        <script src="{{ asset('assets/asset_admin/js/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/asset_admin/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/asset_admin/js/metisMenu.min.js') }}"></script>
+        <script src="{{ asset('assets/asset_admin/js/jquery.slimscroll.min.js') }}"></script>
+
+        <!-- Start datatable js -->
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+        <!-- others plugins -->
+        <script src="{{ asset('assets/asset_admin/js/plugins.js') }}"></script>
+        <script src="{{ asset('assets/asset_admin/js/scripts.js') }}"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.copyright-year').text(new Date().getFullYear());
+            });
+        </script>
+    </body>
 </html>
