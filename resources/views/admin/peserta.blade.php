@@ -1,35 +1,31 @@
-@extends('layout-admin.layout')
+@extends('layout.admin')
 
 @section('content')
-
-@if(session('status'))
-            <div class="alert alert-danger" id="status">
-                {{session('status')}}
-            </div>
-@endif
-
-<div class="row">
-        <div class="col-md-12">
-            <!-- <div><a href="/csv" class="btn btn-primary" id="export" onclick="exportTasks(event.target);">Export as CSV</a></div> -->
+    <div class="row">
+        <div class="col-12 mt-5">
             <div class="card">
-                <div class="card-header card-header-success">
-                    <!-- <h4 class="card-title h3 fw-bold m-0" id="judul">Studi Ekskursi</h4> -->
+                <div class="card=body">
+                    <select name="" id="nama_acara">
+                        <option value="" selected disabled>-- Pilih Acara --</option>
+                        @foreach ($acara as $a)
+                            <option value="{{$a->id}}">{{$a->nama}}</option>
+                        @endforeach
+                    </select>
+                    <button type="button" onclick="tampil()">Tampilkan</button>
                 </div>
-                <div class="card-body" style="text-align: center">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-success">
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>NRP</th>
-                                <th>Jurusan</th>
-                                <th>Angkatan</th>
-                                <th>No HP/ Whatsapp</th>
-                                <th>Waktu Daftar</th>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title" id="title"></h4>
+                    <div class="data-tables datatable-dark">
+                        <table id="dataTable3" class="text-center">
+                            <thead class="text-capitalize">
+                                <tr>
+                                
+                                </tr>
                             </thead>
                             <tbody>
-                                
+                            
                             </tbody>
                         </table>
                     </div>
@@ -41,7 +37,20 @@
     
 @section('Javascript')
 <script>
-
+    function tampil(){
+        var id = $('nama_acara').val();
+        $.ajax({
+				type: 'POST',
+				url:'{{ route("ambilpeserta") }}',
+				data: {
+					'_token':'<?php echo csrf_token() ?>',
+					'id': id
+				},
+				success: function(data){
+					
+				}
+				});
+    }
 
 </script>
 @endsection

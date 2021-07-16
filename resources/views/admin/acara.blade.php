@@ -10,62 +10,70 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <button href="" data-toggle="modal" type="button" class="btn btn-info" data-target="#modaltambahrd">Tambah Baru</button><br><br>
-            <table class="table table-paginate" id="table_id" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th scope="col">Nomer</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Mulai Pendaftaran</th>
-                        <th scope="col">Selesai Pendaftaran</th>
-                        <th scope="col">Tanggal Acara</th>
-                        <th scope="col">Tipe</th>
-                        <th scope="col">Status Pendaftaran</th>
-                        <th scope="col">Status Acara</th>
-                        <th scope="col">Deskripsi</th>
-                        <th scope="col" style="text-align:center;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   
-                    @php($nomer = 1);
-                    @foreach($acara as $a)
-                        <tr>
-                        @php($tipe = 'Eksternal');
-                        @php($pendaftaran = 'Close');
-                        @php($status = 'Progress');
-                            <?php
-                            if($a->eksternal == 0){
-                                $tipe ="Internal";
-                            }
-                            if($a->daftar == 1){
-                                $pendaftaran="Open";
-                            }
-                            if($a->selesai == 1){
-                                $status = "Finish";
-                            }
-                            ?>
-                            <td>{{$nomer}}</td>
-                            <td>{{$a->nama}}</td>
-                            <?php
-                                $tanggal_mulai = date('d/m/Y H:i', strtotime($a->tanggal_mulai));
-                                $tanggal_akhir = date('d/m/Y H:i', strtotime($a->tanggal_akhir));
-                            ?>
-                            <td>{{$tanggal_mulai}}</td>
-                            <td>{{$tanggal_akhir}}</td>
-                            <td>{{$a->tanggal_acara}}</td>
-                            <td>{{$tipe}}</td>
-                            <td>{{$pendaftaran}}</td>
-                            <td>{{$status}}</td>
-                            <td>{{$a->deskripsi}}</td>
-                            <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button></td>
-                            <td><button type="button" value="{{$a->id}}">Hapus</button></td>
-                            <td><button type="button" value="{{$a->id}}">Download CSV</button></td>
-                        </tr>
-                        @php($nomer++);
-                    @endforeach
-                </tbody>
-
-            </table>
+            <div class="col-12 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Data Table Default</h4>
+                        <div class="data-tables">
+                            <table id="dataTable" class="text-center">
+                            <thead>
+                                    <tr>
+                                        <th scope="col">Nomer</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Mulai Pendaftaran</th>
+                                        <th scope="col">Selesai Pendaftaran</th>
+                                        <th scope="col">Tanggal Acara</th>
+                                        <th scope="col">Tipe</th>
+                                        <th scope="col">Status Pendaftaran</th>
+                                        <th scope="col">Status Acara</th>
+                                        <th scope="col">Deskripsi</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    @php($nomer = 1);
+                                    @foreach($acara as $a)
+                                        <tr>
+                                        @php($tipe = 'Eksternal');
+                                        @php($pendaftaran = 'Close');
+                                        @php($status = 'Progress');
+                                            <?php
+                                            if($a->eksternal == 0){
+                                                $tipe ="Internal";
+                                            }
+                                            if($a->daftar == 1){
+                                                $pendaftaran="Open";
+                                            }
+                                            if($a->selesai == 1){
+                                                $status = "Finish";
+                                            }
+                                            ?>
+                                            <td>{{$nomer}}</td>
+                                            <td>{{$a->nama}}</td>
+                                            <?php
+                                                $tanggal_mulai = date('d/m/Y H:i', strtotime($a->tanggal_mulai));
+                                                $tanggal_akhir = date('d/m/Y H:i', strtotime($a->tanggal_akhir));
+                                            ?>
+                                            <td>{{$tanggal_mulai}}</td>
+                                            <td>{{$tanggal_akhir}}</td>
+                                            <td>{{$a->tanggal_acara}}</td>
+                                            <td>{{$tipe}}</td>
+                                            <td>{{$pendaftaran}}</td>
+                                            <td>{{$status}}</td>
+                                            <td>{{$a->deskripsi}}</td>
+                                            <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button></td>
+                                            <td><button type="button" value="{{$a->id}}">Hapus</button></td>
+                                            <td><button type="button" value="{{$a->id}}">Download CSV</button></td>
+                                        </tr>
+                                        @php($nomer++);
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -220,10 +228,6 @@
     </div>
 
     <script>
-       $(document).ready( function () {
-           alert('dor');
-            $('#table_id').DataTable();
-        } );
         function ubah(id){
             var id = id;
             
