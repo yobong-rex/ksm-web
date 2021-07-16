@@ -84,7 +84,7 @@
     <div class="modal fade" id="modaltambahrd" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form role="form" method='POST' action="/admin/tambah">
+                <form role="form" method='POST' action="/admin/acara/tambah">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Tambah Acara</h4>
@@ -151,7 +151,7 @@
     <div class="modal fade" id="modaledit" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form role="form" method='POST' action="/admin/edit">
+                <form role="form" method='POST' action="/admin/acara/edit">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Tambah Acara</h4>
@@ -233,7 +233,7 @@
             
             $.ajax({
 				type: 'POST',
-				url:'{{ route("ambilacara") }}',
+				url:'{{ route("ambil-acara") }}',
 				data: {
 					'_token':'<?php echo csrf_token() ?>',
 					'id': id

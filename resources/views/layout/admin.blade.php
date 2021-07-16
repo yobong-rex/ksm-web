@@ -23,7 +23,14 @@
         <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/responsive.css') }}">
         
         <!-- modernizr css -->
-        <script src="asset('assets/asset_admin//js/vendor/modernizr-2.8.3.min.js') }}"></script>
+        <script src="asset('assets/asset_admin/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+        <style>
+            ul#menu > li:hover a {
+                background: rgba(150, 150, 150, 0.3);
+                transition: 0.8s;
+            }
+        </style>
     </head>
 
     <body>
@@ -33,19 +40,20 @@
             <div class="sidebar-menu">
                 <div class="sidebar-header">
                     <div class="logo">
-                        <a href="index.html"><img src="" alt="logo"></a>
+                        <img src="{{ asset('/assets/img/ksm-putih.png') }}" alt="logo-ksm" class="w-75">
                     </div>
                 </div>
                 <div class="main-menu">
                     <div class="menu-inner">
                         <nav>
                             <ul class="metismenu" id="menu">
-                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Manage Acara</span></a></li>
-                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Manage Struktur</span></a></li>
-                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>List Peserta</span></a></li>
-                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Gallery Acara</span></a></li>
-                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Info KSM</span></a></li>
-                                <li><a href="maps.html"><i class="ti-map-alt"></i> <span>Bursa Soal</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-dashboard') }}"><span class="text-white h6">Dashboard</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-acara') }}"><span class="text-white h6">Manage Acara</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-struktur') }}"><span class="text-white h6">Manage Struktur</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-peserta') }}"><span class="text-white h6">List Peserta</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-galeri') }}"><span class="text-white h6">Gallery Acara</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-info-ksm') }}"><span class="text-white h6">Info KSM</span></a></li>
+                                <li class="mb-2"><a href="{{ route('admin-bursa-soal') }}"><span class="text-white h6">Bursa Soal</span></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -70,7 +78,7 @@
             <!-- footer area end-->
         </div>
         <!-- page container area end -->
-        
+
         <!-- jquery latest version -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -90,6 +98,8 @@
         <!-- others plugins -->
         <script src="{{ asset('assets/asset_admin/js/plugins.js') }}"></script>
         <script src="{{ asset('assets/asset_admin/js/scripts.js') }}"></script>
+
+        
 
         <script>
             $(document).ready(function() {

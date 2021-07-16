@@ -13,28 +13,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register'=>false]); // ['register'=>false]
+Auth::routes(['register'=>false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Route halaman utama
 Route::get('/', 'MainController@beranda')->name('beranda');
 Route::get('/struktur-organisasi', 'MainController@strukturOrganisasi')->name('struktur-organisasi');
 Route::get('/acara', 'MainController@acara')->name('acara');
 Route::get('/galeri', 'MainController@galeri')->name('galeri');
 Route::get('/lsta-bursa', 'MainController@lstaBursa')->name('lsta-bursa');
 
+// Route admin
+Route::get('/admin/dashboard','AdminController@index')->name('admin-dashboard')->middleware('auth');
 
-Route::get('/pendaftaran',function(){
-    return view('pendaftaran.index');
-})->name('pendaftaran');
+// Route untuk acara
+Route::get('/admin/acara','AcaraController@index')->name('admin-acara')->middleware('auth');
+Route::post('/admin/acara/tambah','AcaraController@tambahAcara')->name('tambah-acara');
+Route::post('/admin/acara/edit','AcaraController@editAcara')->name('edit-acara');
+Route::post('/admin/acara/ambil','AcaraController@ambilAcara')->name('ambil-acara');
+Route::post('/admin/acara/hapus-peserta','AcaraController@hapusPeserta')->name('hapus-semua-peserta');
 
-Route::post('/pendaftaran/ok','pendaftaranControllers@Pendaftaran')->name('pendaftaranOk');
+Route::get('/admin/peserta', 'PesertaController@index')->name('admin-peserta')->middleware('auth');
+Route::post('/admin/peserta/ambil','PesertaController@ambilPeserta')->name('ambil-peserta');
+Route::post('/admin/peserta/hapus','PesertaController@hapusPeserta')->name('hapus-peserta');
 
-Route::post('/admin/tambah','AdminController@tambahAcara')->name('tambah');
-Route::post('/admin/edit','AdminController@editAcara')->name('edit');
-Route::get('/admin/acara','AdminController@acara')->name('acara')->middleware('auth');
-Route::get('/admin/peserta','AdminController@peserta')->name('peserta')->middleware('auth');
-Route::post('/admin/ambil','AdminController@ambilAcara')->name('ambilacara');
-Route::post('/admin/hapus','pendaftaranControllers@hapus')->name('hapus');
+Route::get('/admin/struktur','AdminController@index')->name('admin-struktur');
+
+Route::get('/admin/galeri','AdminController@index')->name('admin-galeri');
+
+Route::get('/admin/info-ksm','AdminController@index')->name('admin-info-ksm');
+
+Route::get('/admin/bursa-soal','BursaController@index')->name('admin-bursa-soal');
+Route::post('/admin/bursa-soal/update','BursaController@update')->name('bursa-update');
 
 // Route::get('/csv','pendaftaranControllers@csv')->name('csv');
 
