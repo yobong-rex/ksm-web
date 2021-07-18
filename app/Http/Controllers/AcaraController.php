@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Response;
 
 class AcaraController extends Controller
 {
@@ -123,5 +124,28 @@ class AcaraController extends Controller
         ]);
         
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Diubah');
+    }
+
+    public function csv(Request $request){
+        $id_acara = $request->get('id_acara');
+        $nama_acara = $request->get('nama_acara');
+        $data = DB::table('pesertas')->where('acaras_id',$id_acara)->get();
+        $filename = "peserta_".$nama_acara.".csv";
+            
+        $nomer = 1;
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('No', 'Nama', 'Email', 'NRP', 'Jurusan', 'Angkatan', 'No HP/Whatsapp', 'Waktu Daftar'));
+        foreach($data as $row) {
+            fputcsv($handle, array($nomer, $row->nama, $row->email, $row->nrp, $row->jurusan, $row->angkatan, $row->nohp_whatsapp, $row->waktu));
+            $nomer++;
+        }
+    
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download($filename, $filename.'.csv', $headers);
     }
 }

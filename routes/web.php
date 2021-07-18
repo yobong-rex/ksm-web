@@ -46,7 +46,7 @@ Route::get('/admin/info-ksm','AdminController@index')->name('admin-info-ksm');
 Route::get('/admin/bursa-soal','BursaController@index')->name('admin-bursa-soal');
 Route::post('/admin/bursa-soal/update','BursaController@update')->name('bursa-update');
 
-// Route::get('/csv','pendaftaranControllers@csv')->name('csv');
+Route::get('/csv','AcaraController@csv')->name('csv');
 
 
 

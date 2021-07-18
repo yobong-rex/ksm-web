@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 @if(session('status'))
             <div class="alert alert-success" id="status">
                 {{session('status')}}
@@ -63,7 +63,7 @@
                                                     <td>{{$pendaftaran}}</td>
                                                     <td>{{$status}}</td>
                                                     <td>{{$a->deskripsi}}</td>
-                                                    <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button> <button type="button" value="{{$a->id}}">Hapus</button><button type="button" value="{{$a->id}}">Download CSV</button></td>
+                                                    <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button> <button type="button" value="{{$a->id}}">Hapus</button><button type="button" class="btn-csv" nama_acara="{{$a->nama}}" id_acara="{{$a->id}}">Download CSV</button></td>
                                                 </tr>
                                                 @php($nomer++);
                                             @endforeach
@@ -224,6 +224,7 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function ubah(id){
             var id = id;
@@ -267,7 +268,23 @@
                         $('#galeri').val(data.list[key].deskripsi_galeri);
                     });
 				}
-				});
+			});
         }
+
+        $(document).on('click', '.btn-csv', function(){
+            var id_acara = $(this).attr("id_acara");
+            var nama_acara = $(this).attr("nama_acara");
+
+            $.ajax({
+				type: 'POST',
+				url:'{{ route("csv") }}',
+				data: {
+					'_token':'<?php echo csrf_token() ?>',
+					'id_acara': id_acara,
+					'nama_acara': nama_acara
+				}
+			});
+        });
+
     </script>
 @endsection
