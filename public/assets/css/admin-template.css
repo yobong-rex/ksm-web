@@ -1,0 +1,22 @@
+.nav-item:hover {
+    background: #663a82;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+div.side-navigation {
+    min-height: 100vh;
+}
+
+.close-icon { display: none; }
+.logo { display: block; }
+
+@media screen and (max-width: 960px) {
+    .close-icon { display: block; }
+    .logo { display: none; }
+    .side-navigation {
+        width: 0;
+        display: none;
+    }
+}
