@@ -23,3 +23,10 @@
         </div>
     </div>
 @endsection
+
+@section('javascript')
+    <script>
+        $('#nav-dashboard').addClass('active');
+        $('#nav-dashboard span').addClass('active-font');
+    </script>
+@endsection
