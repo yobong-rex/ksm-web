@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+* { box-sizing: border-box !important; }
 .poppins-normal { font-family: Poppins; }
 .side-navigation { min-height: 100vh; }
 .close-icon { display: none; }
 .logo { display: block; }
 .mobile-header { display: none; }
 .nav-item { border-radius: 5px; transition: 0.5s; cursor: pointer; }
-.nav-item:hover { background: #9932CC; }
-.active { background: #FF00FF; }
-.active-font { font-weight: bold; }
+.nav-item:hover:not(.active) { background: #DA70D6; }
+.active { background: #9932CC; }
 @media screen and (max-width: 992px) {
     .close-icon { display: block; }
     .logo { display: none; }
