@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Response;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use App\Exports\PesertaExport;
 
 class AcaraController extends Controller
 {
@@ -126,26 +129,20 @@ class AcaraController extends Controller
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Diubah');
     }
 
-    public function csv(Request $request){
-        $id_acara = $request->get('id_acara');
-        $nama_acara = $request->get('nama_acara');
-        $data = DB::table('pesertas')->where('acaras_id',$id_acara)->get();
-        $filename = "peserta_".$nama_acara.".csv";
-            
-        $nomer = 1;
-        $handle = fopen($filename, 'w+');
-        fputcsv($handle, array('No', 'Nama', 'Email', 'NRP', 'Jurusan', 'Angkatan', 'No HP/Whatsapp', 'Waktu Daftar'));
-        foreach($data as $row) {
-            fputcsv($handle, array($nomer, $row->nama, $row->email, $row->nrp, $row->jurusan, $row->angkatan, $row->nohp_whatsapp, $row->waktu));
-            $nomer++;
-        }
-    
-        fclose($handle);
 
-        $headers = array(
-            'Content-Type' => 'text/csv',
-        );
-
-        return Response::download($filename, $filename.'.csv', $headers);
+    public function export_excel($acara_id){
+        $acara = DB::table('acaras')->where('id',$acara_id)->get();
+        $nama_acara = $acara[0]->nama;
+        $peserta = DB::table('pesertas')->where('acaras_id',$acara_id)->get();
+         return (new PesertaExport($acara_id))->download('Peserta '.$nama_acara.'.xlsx');
     }
+
+    public function hapusPeserta(Request $request){
+        $id_acara = $request->get('acara_delete');
+        $nama_acara = $request->get('nama_acara_delete');
+        $delete_peserta = DB::table('pesertas')->where('acaras_id',$id_acara)->delete();
+        return redirect()->route('admin-acara')->with('status','Berhasil menghapus semua peserta '.$nama_acara);
+    }
+
+   
 }

@@ -63,7 +63,7 @@
                                                     <td>{{$pendaftaran}}</td>
                                                     <td>{{$status}}</td>
                                                     <td>{{$a->deskripsi}}</td>
-                                                    <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button> <button type="button" value="{{$a->id}}">Hapus</button><button type="button" class="btn-csv" nama_acara="{{$a->nama}}" id_acara="{{$a->id}}">Download CSV</button></td>
+                                                    <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button> <button type="button" value="{{$a->id}}" class="btn-delete" id_acara="{{$a->id}}" nama_acara="{{$a->nama}}" data-toggle="modal" data-target="#modalHapus">Hapus</button><a href="/admin/acara/excel/{{$a->id}}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a></td>
                                                 </tr>
                                                 @php($nomer++);
                                             @endforeach
@@ -224,6 +224,32 @@
         </div>
     </div>
 
+    <!-- modal delete start -->
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form role="form" method='POST' action="/admin/acara/hapus-peserta">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Konfirmasi</h4>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        
+                        Yakin ingin menghapus semua peserta dari acara <span id="acara_delete"></span> ?
+                        <input type="hidden" id="id_acara_delete" name="acara_delete">
+                        <input type="hidden" id="nama_acara_delete" name="nama_acara_delete">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function ubah(id){
@@ -271,19 +297,12 @@
 			});
         }
 
-        $(document).on('click', '.btn-csv', function(){
+        $(document).on('click', '.btn-delete', function(){
             var id_acara = $(this).attr("id_acara");
             var nama_acara = $(this).attr("nama_acara");
-
-            $.ajax({
-				type: 'POST',
-				url:'{{ route("csv") }}',
-				data: {
-					'_token':'<?php echo csrf_token() ?>',
-					'id_acara': id_acara,
-					'nama_acara': nama_acara
-				}
-			});
+            $('#acara_delete').html(nama_acara);
+            $('#id_acara_delete').val(id_acara);
+            $('#nama_acara_delete').val(nama_acara);
         });
 
     </script>

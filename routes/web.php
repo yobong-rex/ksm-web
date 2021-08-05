@@ -32,6 +32,7 @@ Route::post('/admin/acara/tambah','AcaraController@tambahAcara')->name('tambah-a
 Route::post('/admin/acara/edit','AcaraController@editAcara')->name('edit-acara');
 Route::post('/admin/acara/ambil','AcaraController@ambilAcara')->name('ambil-acara');
 Route::post('/admin/acara/hapus-peserta','AcaraController@hapusPeserta')->name('hapus-semua-peserta');
+Route::get('/admin/acara/excel/{acara_id}','AcaraController@export_excel')->name('export-excel-peserta');
 
 Route::get('/admin/peserta', 'PesertaController@index')->name('admin-peserta')->middleware('auth');
 Route::post('/admin/peserta/ambil','PesertaController@ambilPeserta')->name('ambil-peserta');
