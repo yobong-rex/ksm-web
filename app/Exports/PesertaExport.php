@@ -15,6 +15,8 @@ class PesertaExport implements FromQuery, WithHeadings
     public function headings(): array
     {
         return [
+            'No',
+            'acara',
             'Nama',
             'NRP',
             'Email',
