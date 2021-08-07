@@ -1,6 +1,9 @@
 @extends('layout.admin')
 
 @section('content')
+<div class="container-fluid">
+    
+</div>
     <div class="row">
         @if(session('status'))
             <div class="alert alert-danger" id="status">
@@ -30,10 +33,11 @@
                                     <th>Nama</th>
                                     <th>Jurusan</th>
                                     <th>Foto</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="list">
-                        
+                                
                             </tbody>
                         </table>
                     </div>
@@ -46,8 +50,29 @@
     <script>
         $(document).on('change', '.select-divisi', function(){
             var divisi = $(this).val();
-            
-
+            $("#list").html('');
+            $.ajax({
+				type: 'POST',
+				url:'{{ route("ambil-struktur") }}',
+				data: {
+					'_token':'<?php echo csrf_token() ?>',
+					'divisi': divisi
+				},
+				success: function(data){
+					$.each(data.anggota, function(key,value){
+                        $("#list").append(`
+                                        <tr>
+                                        <td>`+ data.anggota[key].jabatan+`</td>
+                                        <td>`+ data.anggota[key].nrp+`</td>
+                                        <td>`+ data.anggota[key].nama+`</td>
+                                        <td>`+ data.anggota[key].jurusan+`</td>
+                                        <td><button type="button" value='`+data.anggota[key].foto_profil+`' class='btn btn-success'> Foto Profile</button></td>
+                                        <td><button type="button"  class='btn btn-danger'> Hapus</button></td>
+                                        </tr>
+                        `);
+                    });
+				}
+			});
         });
     </script>
 @endsection

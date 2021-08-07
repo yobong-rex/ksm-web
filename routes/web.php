@@ -39,6 +39,7 @@ Route::post('/admin/peserta/ambil','PesertaController@ambilPeserta')->name('ambi
 Route::post('/admin/peserta/hapus','PesertaController@hapusPeserta')->name('hapus-peserta');
 
 Route::get('/admin/struktur','StrukturController@index')->name('admin-struktur');
+Route::post('/admin/struktur/ambil','StrukturController@ambil')->name('ambil-struktur');
 
 Route::get('/admin/galeri','AdminController@index')->name('admin-galeri');
 
