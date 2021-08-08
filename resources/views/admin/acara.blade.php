@@ -25,6 +25,7 @@
                                             <th scope="col">Mulai Pendaftaran</th>
                                             <th scope="col">Selesai Pendaftaran</th>
                                             <th scope="col">Tanggal Acara</th>
+                                            <th scope="col">Tahun</th>
                                             <th scope="col">Tipe</th>
                                             <th scope="col">Status Pendaftaran</th>
                                             <th scope="col">Status Acara</th>
@@ -59,6 +60,7 @@
                                                     <td>{{$tanggal_mulai}}</td>
                                                     <td>{{$tanggal_akhir}}</td>
                                                     <td>{{$a->tanggal_acara}}</td>
+                                                    <td>{{$a->tahun}}</td>
                                                     <td>{{$tipe}}</td>
                                                     <td>{{$pendaftaran}}</td>
                                                     <td>{{$status}}</td>
@@ -117,6 +119,11 @@
                                 <label>Tipe</label> <br>
                                 <input type="radio"  id="" name="tipe" value='1' checked> <label>Eksternal</label>
                                 <input type="radio"  id="" name="tipe" value='0'> <label>Internal</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tahun Acara</label>
+                                <input type="text" class="form-control" id="" name="tahun-acara" placeholder="Masukan tahun saja, contoh: 2020" required>
                             </div>
                             
                             <div class="form-group">
@@ -179,6 +186,11 @@
                                     <label>Akhir Acara</label>
                                     <input type="date" class="form-control" id="waktu_akhir" name="waktu_akhir" required>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tahun Acara</label>
+                                <input type="text" class="form-control" id="tahun-acara" name="tahun-acara" required>
                             </div>
                             
                            <div class="form-group">
@@ -270,6 +282,7 @@
                         $('#tanggal_selesai').val(data.selesai);
                         $('#waktu_awal').val(data.tanggal_awal);
                         $('#waktu_akhir').val(data.tanggal_akhir);
+                        $('#tahun-acara').val(data.list[key].tahun);
                         if(data.list[key].eksternal == 0){
                             $('#internal').prop("checked", true);
                         }

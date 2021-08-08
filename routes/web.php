@@ -40,6 +40,8 @@ Route::post('/admin/peserta/hapus','PesertaController@hapusPeserta')->name('hapu
 
 Route::get('/admin/struktur','StrukturController@index')->name('admin-struktur');
 Route::post('/admin/struktur/ambil','StrukturController@ambil')->name('ambil-struktur');
+Route::post('/admin/struktur/jabatan','StrukturController@ambilJabatan')->name('ambil-jabatan');
+Route::post('/admin/struktur/tambah','StrukturController@tambah')->name('tambah-anggota');
 
 Route::get('/admin/galeri','AdminController@index')->name('admin-galeri');
 

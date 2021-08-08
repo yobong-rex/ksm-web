@@ -26,6 +26,7 @@ class AcaraController extends Controller
         $link_grup = $request->get('link_grup');
         $waktu_awal = $request->get('waktu_awal');
         $waktu_akhir = $request->get('waktu_akhir');
+        $tahun = $request->get('tahun-acara');
 
         if ($waktu_awal == $waktu_akhir) {
             $waktu = date('j F Y', strtotime($waktu_awal));
@@ -42,7 +43,7 @@ class AcaraController extends Controller
             }
         }
 
-        $insert = DB::table('acaras')->insert(['nama'=>$nama, 'tanggal_mulai'=>$tanggal_mulai, 'tanggal_akhir'=>$tanggal_selesai, 'eksternal'=>$tipe, 'link_gambar'=>$poster, 'deskripsi'=>$deskripsi, 'link_grup'=>$link_grup, 'tanggal_acara'=>$waktu]);
+        $insert = DB::table('acaras')->insert(['nama'=>$nama, 'tanggal_mulai'=>$tanggal_mulai, 'tanggal_akhir'=>$tanggal_selesai, 'eksternal'=>$tipe, 'link_gambar'=>$poster, 'deskripsi'=>$deskripsi, 'link_grup'=>$link_grup, 'tanggal_acara'=>$waktu, 'tahun'=>$tahun]);
             
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Ditambah');
     }
@@ -96,6 +97,7 @@ class AcaraController extends Controller
         $deskripsi_galeri = $request->get('deskripsi_galeri');
         $waktu_awal = $request->get('waktu_awal');
         $waktu_akhir = $request->get('waktu_akhir');
+        $tahun = $request->get('tahun-acara');
 
         if($waktu_awal == $waktu_akhir){
             $waktu = date('j F Y', strtotime($waktu_awal));
@@ -123,7 +125,8 @@ class AcaraController extends Controller
             'link_gambar'=>$poster,
             'deskripsi'=>$deskripsi,
             'deskripsi_galeri'=>$deskripsi_galeri,
-            'tanggal_acara'=>$waktu
+            'tanggal_acara'=>$waktu,
+            'tahun'=>$tahun
         ]);
         
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Diubah');
