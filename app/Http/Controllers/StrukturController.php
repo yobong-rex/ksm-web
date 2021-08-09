@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class StrukturController extends Controller
 {
@@ -54,8 +55,37 @@ class StrukturController extends Controller
         $insert = DB::table('personals')->insert(['divisis_id'=>$divisi, 'jabatans_id'=>$jabatan,'nrp'=>$nrp, 'nama'=>$nama,'jurusan'=>$jurusan,'foto_profil'=>$nama_file]);
             
         return redirect()->route('admin-struktur')->with('status','Anggota Berhasil Ditambah');
+    }
 
+    public function edit(Request $request){
+        $nama = $request->get('nama');
+        $nrp = $request->get('nrp');
+        $jurusan = $request->get('jurusan');
+        $divisi = $request->get('divisi');
+        $jabatan = $request->get('jabatan');
+        $nama_file='';
+        
+        if($request->hasFile('foto-tambah')){
+            $foto = $request->file("foto-tambah");
+            $data_divisi = DB::table("divisis")->where('id',$divisi)->get();
+            $data_jabatan = DB::table("jabatans")->where('id',$jabatan)->get();
+            $data_foto = DB::table('personals')->where('nrp',$nrp)->get();
+            Storage::delete(public_path('assets/img/foto_anggota/'.$data_foto[0]->foto_profil));
+            $ext =$foto->getClientOriginalExtension();
+            $nama_file = $data_jabatan[0]->nama.'_'. $data_divisi[0]->nama.'_'.$nama.'.'.$ext;
+            $foto->move('assets/img/foto_anggota',$nama_file);
+            $update = DB::table('personals')->where('nrp',$nrp)->update(['foto_profil'=>$nama_file]);
+           
+        }
+        $update = DB::table('personals')->where('nrp',$nrp)->update(['divisis_id'=>$divisi, 'jabatans_id'=>$jabatan,'nrp'=>$nrp, 'nama'=>$nama,'jurusan'=>$jurusan]);
+        return redirect()->route('admin-struktur')->with('status','Data Anggota Berhasil Diubah');
+    }
 
-
+    public function ambilAnggota(Request $request){
+        $nrp = $request->get('nrp');
+        $data = DB::select(DB::raw("SELECT j.nama as jabatan, p.nrp, p.nama, p.jurusan, p.foto_profil, d.nama AS divisi FROM (`personals` as p INNER JOIN jabatans as j on p.jabatans_id = j.id) INNER JOIN divisis as d on p.divisis_id = d.id WHERE p.nrp = '$nrp'")); 
+        return response()->json(array(
+            'anggota_persoanal'=>$data
+        ), 200);
     }
 }

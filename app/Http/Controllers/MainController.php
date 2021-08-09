@@ -54,17 +54,20 @@ class MainController extends Controller
 
     // Load halaman struktur organisasi
     function strukturOrganisasi() {
-        return view('client.struktur_organisasi');
+        $info_ksm = DB::table('info_ksms')->get();
+        return view('client.struktur_organisasi',['info' => $info_ksm[0]]);
     }
 
     // Load halaman acara
     function acara() {
-        return view('client.acara');
+        $info_ksm = DB::table('info_ksms')->get();
+        return view('client.acara',['info' => $info_ksm[0]]);
     }
 
     // Load halaman galeri
     function galeri() {
-        return view('client.galeri');
+        $info_ksm = DB::table('info_ksms')->get();
+        return view('client.galeri',['info' => $info_ksm[0]]);
     }
 
     // Load halaman lsta & bursa

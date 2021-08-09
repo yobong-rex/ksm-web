@@ -42,6 +42,8 @@ Route::get('/admin/struktur','StrukturController@index')->name('admin-struktur')
 Route::post('/admin/struktur/ambil','StrukturController@ambil')->name('ambil-struktur');
 Route::post('/admin/struktur/jabatan','StrukturController@ambilJabatan')->name('ambil-jabatan');
 Route::post('/admin/struktur/tambah','StrukturController@tambah')->name('tambah-anggota');
+Route::post('/admin/struktur/edit','StrukturController@edit')->name('edit-anggota');
+Route::post('/admin/struktur/ambilAnggota','StrukturController@ambilAnggota')->name('ambil-data-anggota');
 
 Route::get('/admin/galeri','AdminController@index')->name('admin-galeri');
 
