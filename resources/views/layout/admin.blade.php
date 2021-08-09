@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-8 p-0 d-flex align-items-center justify-content-center">
-                        <div class="h5 poppins-normal">KSM Informatika</div>
+                        <div class="h5 mt-2 poppins-normal font-weight-bold" style="color: #9932CC">KSM INFORMATIKA</div>
                     </div>
 
                     <div class="col-2 text-right p-0 pr-2">
@@ -62,8 +62,8 @@
                 <div class="side-nav-body pl-2 pt-4 pb-4 pr-2">
                     <ul>
                         <a href="{{ route('admin-dashboard') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-dashboard"><span class="text-white h6 pl-2">Dashboard</span></li></a>
-                        <a href="{{ route('admin-acara') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-acara"><span class="text-white h6 pl-2">Kelola Acara</span></li></a>
-                        <a href="{{ route('admin-struktur') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-struktur"><span class="text-white h6 pl-2">Kelola Struktur</span></li></a>
+                        <a href="{{ route('admin-acara') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-acara"><span class="text-white h6 pl-2">Acara</span></li></a>
+                        <a href="{{ route('admin-struktur') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-struktur"><span class="text-white h6 pl-2">Struktur Organisasi</span></li></a>
                         <a href="{{ route('admin-peserta') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-peserta"><span class="text-white h6 pl-2">Daftar Peserta</span></li></a>
                         <a href="{{ route('admin-galeri') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-galeri"><span class="text-white h6 pl-2">Galeri Acara</span></li></a>
                         <a href="{{ route('admin-info-ksm') }}"><li class="nav-item mb-2 p-3 pl-3" id="nav-info"><span class="text-white h6 pl-2">Info KSM</span></li></a>
@@ -74,7 +74,7 @@
             <!-- sidebar menu area end -->
 
             <!-- main content area start -->
-            <div class="col-12 col-lg-9 col-xl-10 bg-light">
+            <div class="col-12 col-lg-9 col-xl-10" style="background: #F3F3F3">
                 <div class="main-wrapper">
                     @yield('content')
                 </div>
