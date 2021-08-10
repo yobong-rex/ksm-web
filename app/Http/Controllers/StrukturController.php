@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
+use File;
 
 class StrukturController extends Controller
 {
@@ -70,12 +71,11 @@ class StrukturController extends Controller
             $data_divisi = DB::table("divisis")->where('id',$divisi)->get();
             $data_jabatan = DB::table("jabatans")->where('id',$jabatan)->get();
             $data_foto = DB::table('personals')->where('nrp',$nrp)->get();
-            Storage::delete(public_path('assets/img/foto_anggota/'.$data_foto[0]->foto_profil));
+            File::delete(public_path('assets/img/foto_anggota/'.$data_foto[0]->foto_profil));
             $ext =$foto->getClientOriginalExtension();
             $nama_file = $data_jabatan[0]->nama.'_'. $data_divisi[0]->nama.'_'.$nama.'.'.$ext;
             $foto->move('assets/img/foto_anggota',$nama_file);
             $update = DB::table('personals')->where('nrp',$nrp)->update(['foto_profil'=>$nama_file]);
-           
         }
         $update = DB::table('personals')->where('nrp',$nrp)->update(['divisis_id'=>$divisi, 'jabatans_id'=>$jabatan,'nrp'=>$nrp, 'nama'=>$nama,'jurusan'=>$jurusan]);
         return redirect()->route('admin-struktur')->with('status','Data Anggota Berhasil Diubah');
@@ -84,8 +84,23 @@ class StrukturController extends Controller
     public function ambilAnggota(Request $request){
         $nrp = $request->get('nrp');
         $data = DB::select(DB::raw("SELECT j.nama as jabatan, p.nrp, p.nama, p.jurusan, p.foto_profil, d.nama AS divisi FROM (`personals` as p INNER JOIN jabatans as j on p.jabatans_id = j.id) INNER JOIN divisis as d on p.divisis_id = d.id WHERE p.nrp = '$nrp'")); 
+        if($data[0]->divisi == "BPH"){
+            $data_jabatan = DB::table("jabatans")->limit(4)->get();
+        }
+        else{
+            $data_jabatan = DB::table("jabatans")->offset(4)->limit(3)->get();
+        }
         return response()->json(array(
-            'anggota_persoanal'=>$data
+            'anggota_persoanal'=>$data,
+            'jabatan'=>$data_jabatan
         ), 200);
     }
+
+    public function hapus(Request $request){
+        $nrp = $request->get('nrp_anggota_delete');
+        $data_foto = DB::table('personals')->where('nrp',$nrp)->get();
+        File::delete(public_path('assets/img/foto_anggota/'.$data_foto[0]->foto_profil));
+        $delete_peserta = DB::table('personals')->where('nrp',$nrp)->delete();
+        return redirect()->route('admin-struktur')->with('status','Data Anggota Berhasil Dihapus');
+    }   
 }

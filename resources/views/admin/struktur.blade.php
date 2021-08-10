@@ -139,7 +139,7 @@
                 <form role="form" method='POST' action="/admin/struktur/edit" enctype="multipart/form-data">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Tambah Anggota</h4>
+                        <h4 class="modal-title">Edit Anggota</h4>
                     </div>
                     <div class="modal-body">
                         @csrf
@@ -164,7 +164,7 @@
                                 <select name="divisi" id="divisi-edit" class="slt-divisi" >
                                     <option value="" selected disabled>-- Pilih Divisi --</option>
                                     @foreach($divisi as $d){
-                                        <option value="{{$d->id}}" >{{$d->nama}}</option>
+                                        <option id="{{$d->nama}}" value="{{$d->id}}" >{{$d->nama}}</option>
                                     }
                                     @endforeach
                                 </select>
@@ -182,6 +182,30 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <!-- begin::Modal Hapus -->
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form role="form" method='POST' action="/admin/struktur/hapus">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Hapus Anggota</h4>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-body">
+                        Yakin ingin menghapus <span id="anggota_delete"></span> ?
+                        <input type="hidden" id="nrp_anggota_delete" name="nrp_anggota_delete" value="">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-info">Submit</button>
@@ -214,7 +238,7 @@
                                         <td>`+ data.anggota[key].jurusan+`</td>
                                         <td><button type="button"  data-toggle="modal" data-target="#modal-photo" nama="`+data.anggota[key].nama+`" value='{{ asset('assets/img/foto_anggota/`+data.anggota[key].foto_profil+`') }}' class='btn btn-primery modal-foto' > Foto Profile</button></td>
                                         <td><button type="button" onclick="(ubah('`+data.anggota[key].nrp+`'))"  data-toggle="modal" data-target="#modalEdit" class='btn btn-success'> Ubah</button></td>
-                                        <td><button type="button"  class='btn btn-danger'> Hapus</button></td>
+                                        <td><button type="button" data-toggle="modal" data-target="#modalHapus" nama="`+data.anggota[key].nama+`" value="`+data.anggota[key].nrp+`"  class='btn btn-danger btn-hapus'> Hapus</button></td>
                                         </tr>
                         `);
                     });
@@ -263,12 +287,32 @@
                         $('#nrp_edit').val(data.anggota_persoanal[key].nrp);
                         $('#nrp_hidden').val(data.anggota_persoanal[key].nrp);
                         $('#jurusan_edit').val(data.anggota_persoanal[key].jurusan);
-                        // $('#divisi-edit').val(data.anggota_persoanal[key].divisi);
+                        var jabatan = data.anggota_persoanal[key].jabatan
+                        $.each(data.jabatan, function(key,value){
+                            if(data.jabatan[key].nama == jabatan){
+                                $('#jabatan-edit').append(`
+                                <option value="`+ data.jabatan[key].id +`" selected>`+data.jabatan[key].nama+`</option>
+                                `);
+                            }
+                            else{
+                                $('#jabatan-edit').append(`
+                                <option value="`+ data.jabatan[key].id +`">`+data.jabatan[key].nama+`</option>
+                                `);
+                            }
+                        })
+                        $('#divisi-edit').val(data.anggota_persoanal[key].divisi);
                         // $('#jabatan-edit').val(data.anggota_persoanal[key].jabatan);
                     });
 				}
 			});
         }
+
+        $(document).on('click', '.btn-hapus', function(){
+            var nrp= $(this).val();
+            var nama= $(this).attr('nama');
+            $('#anggota_delete').html(nama);
+            $('#nrp_anggota_delete').val(nrp);
+        });
         
     </script>
 @endsection
