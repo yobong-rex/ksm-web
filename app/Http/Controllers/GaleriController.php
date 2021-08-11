@@ -45,4 +45,27 @@ class GaleriController extends Controller
             'galeri' => $daftar_galeri
         ), 200);
     }
+
+    public function editGaleri($acara) {
+        // pengecekan udah selesai apa belom
+
+        $acara = str_replace('-', ' ', $acara);
+
+        $galeri_detil = DB::table('acaras')
+                ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
+                ->where('nama', $acara)
+                ->select('acaras.id as id_acara', 'acaras.nama as nama_galeri', 'acaras.deskripsi_galeri as deskripsi_galeri', 'galeris.link_gambar as link')
+                ->get();
+
+        return view('admin.edit-galeri', ['detil_galeri' => $galeri_detil]);
+    }
+
+    public function updateGaleri(Request $request) {
+        $id_acara = $request->get('id_acara');
+        $deskripsi = $request->get('deskripsi_galeri');
+
+        $update_galeri = DB::table('acaras')->where('id', $id_acara)->update(['deskripsi_galeri' => $deskripsi]);
+        
+        return back()->with('status', 'Galeri berhasil diupdate!');
+    }
 }
