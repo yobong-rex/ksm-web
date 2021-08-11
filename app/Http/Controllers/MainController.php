@@ -55,13 +55,21 @@ class MainController extends Controller
     // Load halaman struktur organisasi
     function strukturOrganisasi() {
         $info_ksm = DB::table('info_ksms')->get();
-        return view('client.struktur_organisasi',['info' => $info_ksm[0]]);
+        $daftar_pengurus = DB::table('personals')
+                    ->join('jabatans','personals.jabatans_id','=','jabatans.id')
+                    ->where('divisis_id', '1')
+                    ->orderBy('jabatans_id', 'asc')
+                    ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan')
+                    ->get();
+        return view('client.struktur_organisasi',['info' => $info_ksm[0],'pengurus' => $daftar_pengurus]);
     }
 
     // Load halaman acara
-    function acara() {
+    function acara($nama_acara) {
         $info_ksm = DB::table('info_ksms')->get();
-        return view('client.acara',['info' => $info_ksm[0]]);
+        $acara = "%".str_replace('-', ' ', strtolower($nama_acara))."%"; 
+        $data = DB::table('acaras')->where('nama','like',$acara)->get();
+        return view('client.acara',['info' => $info_ksm[0],'acara'=>$data]);
     }
 
     // Load halaman galeri
@@ -83,8 +91,9 @@ class MainController extends Controller
 
     //load halaman pendaftaran
     function pendaftaran($nama_acara){
+        $acara = "%".str_replace('-', ' ', strtolower($nama_acara))."%"; 
         $info_ksm = DB::table('info_ksms')->get();
-        $data = DB::table('acaras')->where('nama',$nama_acara)->get();
+        $data = DB::table('acaras')->where('nama','like',$acara)->get();
         return view('client.pendaftaran', [
             'info' => $info_ksm[0],
             'data' => $data

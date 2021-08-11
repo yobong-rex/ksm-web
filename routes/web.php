@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route halaman utama
 Route::get('/', 'MainController@beranda')->name('beranda');
 Route::get('/struktur-organisasi', 'MainController@strukturOrganisasi')->name('struktur-organisasi');
-Route::get('/acara', 'MainController@acara')->name('acara');
+Route::get('/acara/{nama_acara}', 'MainController@acara')->name('acara');
 Route::get('/galeri', 'MainController@galeri')->name('galeri');
 Route::get('/lsta-bursa', 'MainController@lstaBursa')->name('lsta-bursa');
 Route::get('/pendaftaran/{acara_id}', 'MainController@pendaftaran')->name('pendaftaran');
