@@ -1,8 +1,8 @@
 @extends('layout.admin')
 <link rel="stylesheet" href="{{ asset('assets/css/admin-dashboard.css') }}">
 @section('content')
-    <div class="container-fluid">
-        <div class="dashboard-wrapper pt-5 poppins-normal h6 dashboard-text-color">
+    <div class="container-fluid" style="height: 100vh; overflow-y: auto">
+        <div class="dashboard-wrapper pt-5 pl-3 pr-3 poppins-normal h6 custom-text-color">
             <!-- Shortcut Section Top -->
             <div class="row justify-content-center">
                 <!-- Struktur Shortcut -->

@@ -34,10 +34,12 @@ Route::post('/admin/acara/ambil','AcaraController@ambilAcara')->name('ambil-acar
 Route::post('/admin/acara/hapus-peserta','AcaraController@hapusPeserta')->name('hapus-semua-peserta');
 Route::get('/admin/acara/excel/{acara_id}','AcaraController@export_excel')->name('export-excel-peserta');
 
+// Route untuk peserta
 Route::get('/admin/peserta', 'PesertaController@index')->name('admin-peserta')->middleware('auth');
 Route::post('/admin/peserta/ambil','PesertaController@ambilPeserta')->name('ambil-peserta');
 Route::post('/admin/peserta/hapus','PesertaController@hapusPeserta')->name('hapus-peserta');
 
+// Route untuk struktur organisasi
 Route::get('/admin/struktur','StrukturController@index')->name('admin-struktur');
 Route::post('/admin/struktur/ambil','StrukturController@ambil')->name('ambil-struktur');
 Route::post('/admin/struktur/jabatan','StrukturController@ambilJabatan')->name('ambil-jabatan');
@@ -46,7 +48,10 @@ Route::post('/admin/struktur/edit','StrukturController@edit')->name('edit-anggot
 Route::post('/admin/struktur/hapus','StrukturController@hapus')->name('hapus-anggota');
 Route::post('/admin/struktur/ambilAnggota','StrukturController@ambilAnggota')->name('ambil-data-anggota');
 
-Route::get('/admin/galeri','AdminController@index')->name('admin-galeri');
+// Route untuk galeri
+Route::get('/admin/galeri','GaleriController@index')->name('admin-galeri');
+Route::post('/admin/galeri/muat','GaleriController@muat')->name('admin-galeri-muat');
+
 
 Route::get('/admin/info-ksm','AdminController@index')->name('admin-info-ksm');
 

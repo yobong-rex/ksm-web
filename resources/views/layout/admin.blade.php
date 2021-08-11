@@ -74,8 +74,8 @@
             <!-- sidebar menu area end -->
 
             <!-- main content area start -->
-            <div class="col-12 col-lg-9 col-xl-10" style="background: #F3F3F3">
-                <div class="main-wrapper">
+            <div class="col-12 col-lg-9 col-xl-10 p-0" style="background: #F3F3F3">
+                <div class="main-wrapper p-0">
                     @yield('content')
                 </div>
             </div>

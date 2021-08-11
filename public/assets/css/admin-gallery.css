@@ -1,0 +1,26 @@
+.img-image {
+    transition: 0.5s;
+}
+
+.img-gallery:hover {
+    cursor: pointer;
+}
+
+.img-gallery:hover .img-image {
+    opacity: 0.4;
+}
+
+.img-gallery:hover .text-image {
+    opacity: 1;
+}
+
+.text-image {
+    opacity: 0;
+    transition: 0.5s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    line-height: 100%;
+}
