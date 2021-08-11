@@ -135,7 +135,7 @@ class AcaraController extends Controller
 
     public function export_excel($acara_id){
         $acara = DB::table('acaras')->where('id',$acara_id)->get();
-        $nama_acara = $acara[0]->nama;
+        $nama_acara = $acara[0]->nama."_".$acara[0]->tahun;
         $peserta = DB::table('pesertas')->where('acaras_id',$acara_id)->get();
          return (new PesertaExport($acara_id))->download('Peserta '.$nama_acara.'.xlsx');
     }

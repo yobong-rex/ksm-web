@@ -1,188 +1,91 @@
-@extends('header.header')
+@extends('layout.client')
 
 @section('content')
 
-@if(session('status'))
-            <div class="alert alert-success" id="status">
-                {{session('status')}}
+<section>
+<div class="container" id="introduction">
+    <div class="introduction-wrapper mt-3 mt-sm-3 mt-md-4 pt-5 pb-3 pb-sm-3 pb-md-5 h4 text-white">
+            <div class="row mt-4">
+                <div class="col-12 ">
+                    <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda text-center">Pendaftaran {{$data[0]->nama}}</div>
+                    <input type="hidden" id="id_acara" value="{{$data[0]->id}}">
+                    <form action="">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama lengkap*</label>
+                        <input type="text" name='nama' class="form-control" id="nama" aria-describedby="emailHelp" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="NRP" class="form-label">NRP*</label>
+                        <input type="text" name='NRP' class="form-control" id="NRP" aria-describedby="emailHelp" placeholder="Masukkan NRP" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email*</label>
+                        <input type="email" name='email' class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukkan Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jurusan" class="form-label">Jurusan*</label>
+                        <input type="text" name='jurusan' class="form-control" id="jurusan" aria-describedby="emailHelp" placeholder="Masukkan Jurusan" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_hp" class="form-label">No HP/WA*</label>
+                        <input type="text" name='no_hp' class="form-control" id="no_hp" aria-describedby="emailHelp" placeholder="Masukkan No HP/WA" required>
+                    </div>
+                    </form>
+                    <div class="mb-3" style="margin:center">
+                        <center><button type="button" name='daftar' class="btn btn-primary" onclick=daftar() data-toggle="modal" data-target="#modalInformasi" >DAFTAR</button></center>
+                    </div>
+                    
+                    
+                </div>
             </div>
-@endif
-<div class="respo" style="padding-top:10px">
-    <h4 class="animated fadeInDown delay-07s" style="text-align:center">STUDI EKSKURSI 2021</h4>
-    <p class="animated fadeInDown delay-07s" style="text-align:center font-size: 120; padding: 0vh 10vw 0vh 10vw;">Hari, tanggal : Jumat, 09 Juli 2021 - Sabtu, 10 Juli 2021 <br>
-Waktu : 09.00 - 16.10 WIB <br>
-Tempat : Zoom <br> <br>
-
-Jika ada kendala atau pertanyaan bisa menghubungi : <br>
-No Hp: 082248641747 / Line: kikyfadhilah (Kiky)  <br>
-atau <br>
-No Hp: 081235655927 / Line: andrewjuangta (Andrew) <br> <br>
-
-Mohon mengisi formulir ini dengan benar untuk menghindari kesalahan pendataan peserta dan pembuatan sertifikat. Terimakasih 🙏🏻</p> <br>
+    </div>
 </div>
+        
+    </section>
 
-<div class="respo" style="padding: 0vh 10vw 0vh 10vw;">
-<form method='post' action='/pendaftaran/ok'>
-@csrf
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Nama lengkap*</label>
-        <input type="text" name='nama' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukkan nama lengkap" required>
-   <!-- <div id="namaLengkap" class="form-text">masukan nama lengkap</div> -->
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Email*</label>
-        <input type="email" name='email' class="form-control" id="exampleInputPassword1" placeholder="Masukkan email dengan benar" required>
-    <!--<div id="emailHelp" class="form-text">masukan email dengan benar</div> -->
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">NRP/NIP*</label>
-        <input type="text" name='nrp' class="form-control" id="exampleInputPassword1" placeholder="Masukkan NRP/NIP dengan benar" required>
-    <!-- <div id="emailHelp" class="form-text">Khusus mahasiswa UBAYA</div> -->
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Jurusan*</label>
-        <div class="form-check">
-            <input class="form-check-input jurusan" type="radio" name="jurusan" id="informatika" value="informatika" checked>
-            <label class="form-check-label" for="flexRadioDefault1">
-                Informatika
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input jurusan" type="radio" name="jurusan" id="multimedia" value="multimedia" >
-            <label class="form-check-label" for="flexRadioDefault2">
-                Multimedia
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input jurusan" type="radio" name="jurusan" id="sib" value="sib">
-            <label class="form-check-label" for="flexRadioDefault2">
-                Sistem Informasi Bisnis
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="jurusan" id="otherJurusan" onclick="jurusan()" >
-            <label class="form-check-label" for="flexRadioDefault2">
-                other
-            </label>
-        </div>
-        <br>
-        <div id="textJurusan"></div>
-        <!-- <input type="text" name="jurusanOther" class="form-control" id="otherText" placeholder="masukan jurusanmu"> -->
-        <!-- <div id="emailHelp" class="form-text">masukan jurusanmu</div> -->
-  </div>
-
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Angkatan*</label>
-        <div class="form-check">
-            <input class="form-check-input angkatan" type="radio" name="angkatan" id="2017" value="2017" checked>
-            <label class="form-check-label" for="flexRadioDefault1">
-                2017
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input angkatan" type="radio" name="angkatan" id="2018" value="2018" >
-            <label class="form-check-label" for="flexRadioDefault2">
-                2018
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input angkatan" type="radio" name="angkatan" id="2019" value="2019" >
-            <label class="form-check-label" for="flexRadioDefault2">
-                2019
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input angkatan" type="radio" name="angkatan" id="2020" value="2020" >
-            <label class="form-check-label" for="flexRadioDefault2">
-                2020
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="angkatan" id="otherAngkatan" onclick="angkatan()" >
-            <label class="form-check-label" for="flexRadioDefault2">
-                other
-            </label>
-        </div>
-        <br>
-        <div id="textAngkatan"></div>
-        <!-- <input type="text" name="angkatanOther" class="form-control" id="otherText" placeholder="masukan angkatanmu"> -->
-        <!-- <div id="emailHelp" class="form-text">masukan angkatanmu</div> -->
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">No HP/WhatsApp*</label>
-    <input type="text" name='whatsapp' class="form-control" id="exampleInputPassword1" placeholder="081xxxxx" required>
-    <!-- <div id="emailHelp" class="form-text">masukan No HP/WhatsApp yang aktif</div> -->
-  </div><br><br>
-  <div class="mb-3" style="margin:center">
-    <center><button type="submit" name='daftar' class="btn btn-primary" >DAFTAR</button></center>
-  </div>
-</form>
-</div>
-
-
-
-<!-- footer -->
-<footer class="footer">
-	<div class="container">
-		<div class="footer-logo">
-			<a href="#header"><img src="{{asset( '/assets/img/ksm-putih.png' ) }}" alt=""></a>
-		</div>
-		<div class="credits">
-			<h2 style="color: #fff;"><span id="estrig">We Not Me!</span></h2>
-			<p class="text-center" id="esteg" style="color: #888; font-size: 0.7em;"> :)</p>
-		</div>
-	</div>
-</footer>
-<!-- /footer -->
-
-@if(session('status'))
-<!-- Modal -->
-<div class="modal fade" id="modalWa" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
+    <div class="modal fade" id="modalInformasi" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Informasi</h4>
                     </div>
                     <div class="modal-body">
-                    <p>Silahkan untuk join group Whatsapp pada link atau QR code berikut untuk mendapatkan informasi seputar kegiatan Studi Ekskursi 2021</p>
-                    <div>
-                    <p></p><a href="https://chat.whatsapp.com/I3wicDLhFwB25wPDmuHQnq">https://chat.whatsapp.com</a></p>
-                    </div>
-                    <br> <br>
-                    <img src="{{asset( '/assets/img/qr.jpg' ) }}" alt="">
-                    
-
+                        <div class="form-body" id="body_konfirmasi">
+                        Lengkapi data diri terlebih dahulu
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </div>
 
-            <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#modalWa').modal('show');
-                    });
-            </script>
-@endif
+    <script>
+        function daftar(){
+            var nama = $('#nama').val();
+            var nrp = $('#NRP').val();
+            var email = $('#email').val();
+            var jurusan = $('#jurusan').val();
+            var no_hp = $('#no_hp').val();
+            var id_acara = $("#id_acara").val();
 
-<script>
-    $(document).on('click','#otherAngkatan',function(){
-        $('div#textAngkatan').html('<input type="text" name="angkatanOther" class="form-control" id="otherText" placeholder="Masukkan angkatanmu*" required>')
-    });
-
-    $(document).on('click','.angkatan',function(){
-        $('div#textAngkatan').html('')
-    });
-
-    $(document).on('click','#otherJurusan',function(){
-        $('div#textJurusan').html('<input type="text" name="jurusanOther" class="form-control" id="otherText" placeholder="Masukkan jurusanmu*" required>')
-    });
-
-    $(document).on('click','.jurusan',function(){
-        $('div#textJurusan').html('')
-    });
-
-</script>
+            $.ajax({
+				type: 'POST',
+				url:'{{ route("pendaftaran-ok") }}',
+				data: {
+					'_token':'<?php echo csrf_token() ?>',
+                    'nrp': nrp,
+                    'nama':nama,
+                    'email':email,
+                    'jurusan':jurusan,
+                    'no_hp':no_hp,
+                    'id_acara':id_acara,
+				},
+				success: function(data){
+                        $('#body_konfirmasi').html(data.msg);					
+				}
+			});
+        }
+    </script>
 @endsection

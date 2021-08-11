@@ -10,42 +10,27 @@ use Carbon\Carbon;
 class pendaftaranControllers extends Controller
 {
     //untuk pendaftaran
-    public function Pendaftaran(Request $request){
-    //     $now =  Carbon::now();
-    //     $nama = $request->get('nama');
-    //     $email = $request->get('email');
-    //     $nrp = $request->get('nrp');
-    //     // $jurusan = $request->get('jurusan');
-    //     // $angkatan = $request->get('angkatan');
-    //     $jurusan = '';
-    //     $angkatan = '';
-    //     $jurusanOther = $request->get('jurusanOther');
-    //     $angkatanOther = $request->get('angkatanOther');
-    //     $whatsapp = $request->get('whatsapp');
+    public function pendaftaran(Request $request){
+        $now =  Carbon::now();
+        $nrp= $request->get('nrp');
+        $nama= $request->get('nama');
+        $email= $request->get('email');
+        $jurusan= $request->get('jurusan');
+        $no_hp= $request->get('no_hp');
+        $id_acara= $request->get('id_acara');
+        $data=DB::table('acaras')->where('id',$id_acara)->get();
 
-    //     if($jurusanOther == ""){
-    //         $jurusan = $request->get('jurusan');
-    //     }
-    //     else{
-    //         $jurusan = $jurusanOther;
-    //     }
+        $insert = DB::table('pesertas')->insert(['acaras_id'=>$id_acara,'nama'=>$nama,'nrp'=>$nrp,'email'=>$email,'jurusan'=>$jurusan,'no_hp'=>$no_hp,'waktu'=>$now]);
+        if($insert){
+            $msg="Pendaftaran berhasil <br> Silahkan memasuki grup memalui link dibawah ini <br> <a href=".$data[0]->link_grup.">".$data[0]->link_grup."</a>";
+        }
+        else{
+            $msg="Maaf gagal melakukan pendaftaran <br> silahkan refres halaman dan mencoba kembali";
+        }
+        return response()->json(array(
+            'msg'=>$msg
+        ), 200);
 
-    //     if($angkatanOther == ""){
-    //         $angkatan = $request->get('angkatan');
-    //     }
-    //     else{
-    //         $angkatan = $angkatanOther;
-    //     }
-    //     $insert= DB::table('pendaftaran')->insert([
-    //         'nama'=>$nama,
-    //         'email'=>$email,
-    //         'nrp'=>$nrp,
-    //         'jurusan'=>$jurusan,
-    //         'angkatan'=>$angkatan,
-    //         'nohp_whatsapp'=>$whatsapp,
-    //         'waktu'=>$now
-    //     ]);
-        // return redirect()->route('pendaftaran')->with('status','Pendaftaran berhasil');
      }
 
     public function listPendaftar(){

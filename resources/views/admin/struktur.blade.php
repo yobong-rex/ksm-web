@@ -300,7 +300,7 @@
                                 `);
                             }
                         })
-                        $('#divisi-edit').val(data.anggota_persoanal[key].divisi);
+                        $('#' + data.anggota_persoanal[key].divisi).prop('selected',true);
                         // $('#jabatan-edit').val(data.anggota_persoanal[key].jabatan);
                     });
 				}

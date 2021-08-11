@@ -22,6 +22,8 @@ Route::get('/struktur-organisasi', 'MainController@strukturOrganisasi')->name('s
 Route::get('/acara', 'MainController@acara')->name('acara');
 Route::get('/galeri', 'MainController@galeri')->name('galeri');
 Route::get('/lsta-bursa', 'MainController@lstaBursa')->name('lsta-bursa');
+Route::get('/pendaftaran/{acara_id}', 'MainController@pendaftaran')->name('pendaftaran');
+Route::get('/all-galeri','MainController@allGaleri')->name('all-galeri');
 
 // Route admin
 Route::get('/admin/dashboard','AdminController@index')->name('admin-dashboard')->middleware('auth');
@@ -32,7 +34,7 @@ Route::post('/admin/acara/tambah','AcaraController@tambahAcara')->name('tambah-a
 Route::post('/admin/acara/edit','AcaraController@editAcara')->name('edit-acara');
 Route::post('/admin/acara/ambil','AcaraController@ambilAcara')->name('ambil-acara');
 Route::post('/admin/acara/hapus-peserta','AcaraController@hapusPeserta')->name('hapus-semua-peserta');
-Route::get('/admin/acara/excel/{acara_id}','AcaraController@export_excel')->name('export-excel-peserta');
+Route::get('/admin/acara/excel/{nama_acara}','AcaraController@export_excel')->name('export-excel-peserta');
 
 // Route untuk peserta
 Route::get('/admin/peserta', 'PesertaController@index')->name('admin-peserta')->middleware('auth');
@@ -62,6 +64,8 @@ Route::get('/admin/bursa-soal','BursaController@index')->name('admin-bursa-soal'
 Route::post('/admin/bursa-soal/update','BursaController@update')->name('bursa-update');
 
 Route::get('/csv','AcaraController@csv')->name('csv');
+
+Route::post('/pendaftaran/ok','pendaftaranControllers@pendaftaran')->name('pendaftaran-ok');
 
 
 

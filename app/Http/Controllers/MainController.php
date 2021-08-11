@@ -80,4 +80,33 @@ class MainController extends Controller
             'bursa' => $bursa_soal[0]
         ]);
     }
+
+    //load halaman pendaftaran
+    function pendaftaran($nama_acara){
+        $info_ksm = DB::table('info_ksms')->get();
+        $data = DB::table('acaras')->where('nama',$nama_acara)->get();
+        return view('client.pendaftaran', [
+            'info' => $info_ksm[0],
+            'data' => $data
+        ]);
+    }
+
+    function allGaleri(){
+        $info_ksm = DB::table('info_ksms')->get();
+        $daftar_galeri = DB::table('acaras')
+                    ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
+                    ->groupBy('acaras.id', 'acaras.nama')
+                    ->select('acaras.id', 'acaras.nama')
+                    // ->where('selesai', true) // [BUKA COMMENT INI]
+                    ->limit(9)
+                    ->get();
+        foreach ($daftar_galeri as $key => $value) {
+            $get_thumbnail = DB::table('galeris')->where('acaras_id', $value->id)->orderBy('id', 'asc')->select('link_gambar')->get();
+            $daftar_galeri[$key]->thumbnail = $get_thumbnail[0]->link_gambar;
+        }
+        return view('client.all-galery', [
+            'info' => $info_ksm[0],
+            'galeri'=>$daftar_galeri
+        ]);
+    }
 }
