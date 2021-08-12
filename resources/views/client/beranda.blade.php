@@ -8,10 +8,8 @@
             <div class="introduction-wrapper mt-3 mt-sm-3 mt-md-4 pt-5 pb-3 pb-sm-3 pb-md-5 h4 text-white">
                 <div class="row mt-4">
                     <div class="col-12 text-center">
-                        <a href="">
                         <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda">Tentang Kami</div>
                         <div class="p-3 p-sm-3 p-md-4 pt-4 content-text">{{ $info->tentang }}</div>
-                        </a>
                     </div>
 
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 text-center mt-4 mt-sm-4 mt-md-5">
