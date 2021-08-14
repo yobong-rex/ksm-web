@@ -59,7 +59,7 @@ class MainController extends Controller
                     ->join('jabatans','personals.jabatans_id','=','jabatans.id')
                     ->where('divisis_id', '1')
                     ->orderBy('jabatans_id', 'asc')
-                    ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan')
+                    ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan','personals.nrp as nrp')
                     ->get();
         return view('client.struktur_organisasi',['info' => $info_ksm[0],'pengurus' => $daftar_pengurus]);
     }

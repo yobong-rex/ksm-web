@@ -25,6 +25,9 @@ Route::get('/lsta-bursa', 'MainController@lstaBursa')->name('lsta-bursa');
 Route::get('/pendaftaran/{acara_id}', 'MainController@pendaftaran')->name('pendaftaran');
 Route::get('/all-galeri','MainController@allGaleri')->name('all-galeri');
 
+//route ambil data struktur client
+Route::post('/struktur-organisasi/ambil', 'StrukturController@ambilClient')->name('struktur-ambil');
+
 // Route admin
 Route::get('/admin/dashboard','AdminController@index')->name('admin-dashboard')->middleware('auth');
 

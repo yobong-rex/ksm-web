@@ -103,4 +103,30 @@ class StrukturController extends Controller
         $delete_peserta = DB::table('personals')->where('nrp',$nrp)->delete();
         return redirect()->route('admin-struktur')->with('status','Data Anggota Berhasil Dihapus');
     }   
+
+    function ambilClient(Request $request){
+        $id_divisi = $request->get('id_divisi');
+        // $id_divisi = 4;
+        if($id_divisi==1){
+            $bph = DB::table('personals')
+                    ->join('jabatans','personals.jabatans_id','=','jabatans.id')
+                    ->where('divisis_id', '1')
+                    ->orderBy('jabatans_id', 'asc')
+                    ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan','personals.nrp as nrp')
+                    ->get();
+            return response()->json(array(
+                'msg'=>'bph',
+                'bph'=>$bph
+            ), 200);
+        }
+        else{
+            $koor_wakoor = DB::select(DB::raw("SELECT * FROM personals WHERE divisis_id = '$id_divisi' and jabatans_id = 5 or jabatans_id = 6")); 
+            $anggota = DB::table('personals')->where('divisis_id',$id_divisi)->where('jabatans_id',7)->get();
+            return response()->json(array(
+                'msg'=>'selain bph',
+                'koor_wakoor'=>$koor_wakoor,
+                'anggota'=>$anggota
+            ), 200);
+        }
+    }
 }

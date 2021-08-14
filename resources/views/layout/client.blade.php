@@ -61,7 +61,7 @@
                                 <a class="nav-link" href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
+                                <a class="nav-link" href="{{ route('all-galeri') }}">Galeri</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('lsta-bursa') }}">LSTA & BURSA</a>
@@ -113,7 +113,6 @@
                                 <div class="h3 font-weight-bold text-white footer-content-header">Sosial Media</div>
                                 <div>
                                     <a href="{{ $info->youtube }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/youtube.png') }}" alt="youtube" class="social-media-icon"></a>
-                                    <a href="{{ $info->whatsapp }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/whatsapp.png') }}" alt="whatsapp" class="social-media-icon"></a>
                                     <a href="{{ $info->line }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/line.png') }}" alt="line" class="social-media-icon"></a>
                                     <a href="{{ $info->instagram }}" target="_blank"><img src="{{ asset('assets/img/sosial_media/instagram.png') }}" alt="instagram" class="social-media-icon"></a>
                                 </div>

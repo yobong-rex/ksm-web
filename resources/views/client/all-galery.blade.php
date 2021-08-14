@@ -19,9 +19,6 @@ div class="container">
                         </div>
                     @endforeach
 
-                    <div class="col-12 text-center p-5">
-                        <a href="{{ route('all-galeri') }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px">LIHAT SELENGKAPNYA</a>
-                    </div>
                 </div>
             </div>
         </div>
