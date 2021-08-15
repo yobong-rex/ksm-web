@@ -28,12 +28,12 @@
                 <div class="row">
                     <div class="col-12 text-right">
                         <button type="button" onclick="cancel()" class="h5 poppins-normal border-0 btn-cancel mr-3" style="background: none; padding: 12px 20px; border-radius: 5px; color: #9932CC">Cancel</button>
-                        <input type="submit" name="submit" value="Update" class="h5 poppins-normal border-0 text-white btn-submit" style="background: #9932CC; border-radius: 5px; padding: 12px 20px">
+                        <input type="submit" name="submit_edit_galeri" value="Update" class="h5 poppins-normal border-0 text-white btn-submit" style="background: #9932CC; border-radius: 5px; padding: 12px 20px">
                     </div>
                 </div>
 
-                <input type="hidden" name="id_acara" value="{{ $detil_galeri[0]->id_acara }}">
-                <div class="h1 poppins-normal text-center custom-text-color font-weight-bold mt-3 mb-5">{{ $detil_galeri[0]->nama_galeri }}</div>
+                <input type="hidden" name="id_acara" value="{{ $acara->id }}">
+                <div class="h1 poppins-normal text-center custom-text-color font-weight-bold mt-3 mb-5">{{ $acara->nama }}</div>
 
                 <div class="row">
                     <div class="col-12">
@@ -48,17 +48,17 @@
                 <div class="row">
                     <div class="col-12 h4 poppins-normal custom-text-color mb-4">Deskripsi Galeri</div>
                     <div class="col-12 mb-5">
-                        <textarea name="deskripsi_galeri" rows="10" style="width: 100%; resize: none;" class="p-3 poppins-normal h6">{{ $detil_galeri[0]->deskripsi_galeri }}</textarea>
+                        <textarea name="deskripsi_galeri" rows="10" style="width: 100%; resize: none;" class="p-3 poppins-normal h6">{{ $acara->deskripsi_galeri }}</textarea>
                     </div>
 
                     <div class="col-6 h4 poppins-normal custom-text-color mb-4">Daftar Gambar</div>
                     
                     <div class="col-6 h4 poppins-normal custom-text-color mb-3 text-right">
                         <label for="upload-image" class="poppins-normal border-0 text-white" style="background: #D02BBC; border-radius: 5px; padding: 12px 20px; cursor: pointer"><span class="h6">+ Tambah Gambar</span></label>
-                        <input type="file" name="image" id="upload-image" accept="image/*" onchange="addImage()" multiple/>
+                        <input type="file" name="image[]" id="upload-image" accept="image/*" onchange="addImage()" multiple/>
                     </div>
 
-                    <div class="col-12 mb-4" id="add-image-parent">
+                    <div class="col-12 mb-4" id="add-image-parent" style="display: none">
                         <div class="h5">Gambar yang akan ditambahkan:</div>
 
                         <div class="text-white poppins-normal p-2 bg-white" id="add-image-section" style="display: none; flex-direction: row; min-height: 300px; max-height: 300px; border-radius: 10px; overflow-y: hidden; overflow-x: auto;">
@@ -71,11 +71,17 @@
                     <div class="col-12">
                         <!-- Gambar -->
                         <div class="row" id="daftar-galeri">
-                            @foreach($detil_galeri as $g)
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 p-3 img-gallery">
-                                    <img class="rounded-0 img-image w-100" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama_galeri)).'/'.$g->link.'') }}" alt="event-ksm">
-                                </div>
-                            @endforeach
+                            @if ($detil_galeri != null && count($detil_galeri) > 0) 
+                                @foreach($detil_galeri as $g)
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 p-3 img-gallery">
+                                        <img class="rounded-0 img-image w-100" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama_galeri)).'/'.$g->link.'') }}" alt="event-ksm">
+                                        <div style="position: absolute; top: 0px; right: 0px">
+                                            <button type="button" href="#" class="btn btn-danger btn-delete-image" value="{{ $g->id_galeri }}"><span class="h6 font-weight-bold">Delete</span></button>
+                                            <input type="hidden" name="deleteImage[]" value="">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -106,6 +112,22 @@
                 $('#add-image-parent').css('display', 'none')
                 $('#add-image-section').css('display', 'none')
                 $('#add-image-list').html('');
+            }
+        })
+
+        $(document).on('click', '.btn-delete-image', function() {
+            if ($(this).text() == "Delete") {
+                $(this).html("<span class='h6 font-weight-bold'>Cancel</span>")
+                $(this).removeClass('btn-danger')
+                $(this).addClass('btn-secondary')
+                $(this).parent().parent().children('img').css('opacity', '0.3')
+                $(this).parent().children("input[type='hidden']").val($(this).val())
+            } else {
+                $(this).html("<span class='h6 font-weight-bold'>Delete</span>")
+                $(this).removeClass('btn-secondary')
+                $(this).addClass('btn-danger')
+                $(this).parent().parent().children('img').css('opacity', '1')
+                $(this).parent().children("input[type='hidden']").val('')
             }
         })
     </script>
