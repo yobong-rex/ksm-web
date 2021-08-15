@@ -26,7 +26,7 @@ class MainController extends Controller
                     ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
                     ->groupBy('acaras.id', 'acaras.nama')
                     ->select('acaras.id', 'acaras.nama')
-                    // ->where('selesai', true) // [BUKA COMMENT INI]
+                    ->where('selesai', true) // [BUKA COMMENT INI]
                     ->limit(6)
                     ->get();
 
@@ -106,7 +106,7 @@ class MainController extends Controller
                     ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
                     ->groupBy('acaras.id', 'acaras.nama')
                     ->select('acaras.id', 'acaras.nama')
-                    // ->where('selesai', true) // [BUKA COMMENT INI]
+                    ->where('selesai', true) // [BUKA COMMENT INI]
                     ->limit(9)
                     ->get();
         foreach ($daftar_galeri as $key => $value) {

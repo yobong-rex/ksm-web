@@ -51,8 +51,8 @@ class AcaraController extends Controller
     public function ambilAcara(Request $request) {
         $id_acara = $request->get('id');
         $data = DB::table('acaras')->where('id', $id_acara)->get();
-        $mulai = date('Y-m-d\TH:i:s', strtotime($data[0]->tanggal_mulai));
-        $tutup = date('Y-m-d\TH:i:s', strtotime($data[0]->tanggal_akhir));
+        $mulai = date('Y-m-d\TH:i', strtotime($data[0]->tanggal_mulai));
+        $tutup = date('Y-m-d\TH:i', strtotime($data[0]->tanggal_akhir));
         $find = '-';
         $contain = strpos($data[0]->tanggal_acara, $find);
         

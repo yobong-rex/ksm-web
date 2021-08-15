@@ -59,28 +59,32 @@
                     </div>
 
                     <!-- Blade acara -->
-                    @foreach ($acara as $a)
-                        <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-4 acara-card p-3">
-                            <div class="card w-100 h-100 m-0">
-                                <img class="card-img-top" src="{{ asset('assets/img/event/'.$a->link_gambar.'') }}" alt="{{ str_replace(' ', '-', strtolower($a->nama)) }}">
-                                <div class="card-body p-4">
-                                    <div class="card-title mb-3 mt-2 h3 font-weight-bold event-header">{{ $a->nama }}</div>
-                                    <p class="card-text h4 event-text">{{ $a->deskripsi }}</p>
+                    @if(count($acara)>0)
+                        @foreach ($acara as $a)
+                            <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-4 acara-card p-3">
+                                <div class="card w-100 h-100 m-0">
+                                    <img class="card-img-top" src="{{ asset('assets/img/event/'.$a->link_gambar.'') }}" alt="{{ str_replace(' ', '-', strtolower($a->nama)) }}">
+                                    <div class="card-body p-4">
+                                        <div class="card-title mb-3 mt-2 h3 font-weight-bold event-header">{{ $a->nama }}</div>
+                                        <p class="card-text h4 event-text">{{ $a->deskripsi }}</p>
 
-                                    <div class="mt-4" style="margin-bottom: 80px !important">
-                                        <img src="{{ asset('assets/img/kalender.png') }}" alt="kalender" class="kalender-icon">
-                                        <span class="ml-2 font-weight-bold event-text">{{ $a->tanggal_acara }}</span>
+                                        <div class="mt-4" style="margin-bottom: 80px !important">
+                                            <img src="{{ asset('assets/img/kalender.png') }}" alt="kalender" class="kalender-icon">
+                                            <span class="ml-2 font-weight-bold event-text">{{ $a->tanggal_acara }}</span>
+                                        </div>
+
+                                        @if ($a->daftar)
+                                            <a href="/acara/{{ str_replace(' ', '-', strtolower($a->nama)) }}" class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
+                                        @else
+                                            <a class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
+                                        @endif
                                     </div>
-
-                                    @if ($a->daftar)
-                                        <a href="/acara/{{ str_replace(' ', '-', strtolower($a->nama)) }}" class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
-                                    @else
-                                        <a class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
-                                    @endif
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        <div class='display-3 mb-5 header-beranda'>Maaf saat ini tidak ada acara</div>
+                    @endif
                 </div>
             </div>
         </div>

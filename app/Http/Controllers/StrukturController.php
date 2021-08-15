@@ -110,9 +110,10 @@ class StrukturController extends Controller
         if($id_divisi==1){
             $bph = DB::table('personals')
                     ->join('jabatans','personals.jabatans_id','=','jabatans.id')
+                    ->join('divisis','personals.divisis_id','=','divisis.id')
                     ->where('divisis_id', '1')
                     ->orderBy('jabatans_id', 'asc')
-                    ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan','personals.nrp as nrp')
+                    ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan','personals.nrp as nrp', 'divisis.nama as divisi')
                     ->get();
             return response()->json(array(
                 'msg'=>'bph',
@@ -120,8 +121,14 @@ class StrukturController extends Controller
             ), 200);
         }
         else{
-            $koor_wakoor = DB::select(DB::raw("SELECT * FROM personals WHERE divisis_id = '$id_divisi' and jabatans_id = 5 or jabatans_id = 6")); 
-            $anggota = DB::table('personals')->where('divisis_id',$id_divisi)->where('jabatans_id',7)->get();
+            $koor_wakoor = DB::select(DB::raw("SELECT j.nama as jabatan, p.nrp, p.nama, p.foto_profil, d.nama AS divisi FROM (personals as p INNER JOIN jabatans as j on p.jabatans_id = j.id) INNER JOIN divisis as d on p.divisis_id = d.id WHERE p.divisis_id = '$id_divisi' and p.jabatans_id = 5 or p.jabatans_id = 6")); 
+            $anggota = DB::table('personals')
+            ->join('jabatans','personals.jabatans_id','=','jabatans.id')
+            ->join('divisis','personals.divisis_id','=','divisis.id')
+            ->where('personals.divisis_id',$id_divisi)
+            ->where('personals.jabatans_id',7)
+            ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan','personals.nrp as nrp', 'divisis.nama as divisi')
+            ->get();
             return response()->json(array(
                 'msg'=>'selain bph',
                 'koor_wakoor'=>$koor_wakoor,

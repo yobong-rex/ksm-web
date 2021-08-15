@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <div class="display-3 mb-4 mb-sm-4 mb-md-5 header-beranda">Struktur Organisasi</div>
-                        <div class="header-beranda text-white" id="divisi"> <h2>BPH</h2></div>
+                        <div class="header-beranda text-white h1" id="divisi"> BPH</div>
                     </div>
                     <!-- BPH Start -->
                     <div class="row" id="struktur">
@@ -83,7 +83,6 @@
 
     <script>
         function divisi(id_divisi){
-            alert(id_divisi);
             $.ajax({
 				type: 'POST',
 				url:'{{ route("struktur-ambil") }}',
@@ -92,12 +91,11 @@
                     'id_divisi':id_divisi
 				},
 				success: function(data){
-                    
+                   
                     $('#struktur').html('');
                     if(data.msg=="bph"){
-
+                        $('#divisi').html(data.bph[0].divisi);
                         $.each(data.bph, function(key,value){
-                            alert('dar');
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
                                 <div><img src="{{ asset('assets/img/foto_anggota/`+data.bph[key].foto_profil+`') }}" alt="{{ `+data.bph[key].nama_jabatan+` }} KSM IF"class="w-75"></div>
                                 <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">{{ `+data.bph[key].nama+` }}</div>
@@ -107,20 +105,23 @@
                         })
                     }
                     else if(data.msg=="selain bph"){
+                        $('#divisi').html(data.koor_wakoor[0].divisi);
                         $.each(data.koor_wakoor, function(key,value){
+                            var jabatan = data.koor_wakoor[key].jabatan+' '+data.koor_wakoor[key].divisi;
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
-                                <div><img src="{{ asset('assets/img/foto_anggota/`+data.koor_wakoor[key].foto_profil+`') }}" alt="{{ `+data.koor_wakoor[key].jabatans_id+` }} KSM IF"class="w-75"></div>
-                                <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.koor_wakoor[key].jabatans_id+` </div>
-                                <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.koor_wakoor[key].nama+`  KSM IF</div>
+                                <div><img src="{{ asset('assets/img/foto_anggota/`+data.koor_wakoor[key].foto_profil+`') }}" alt="{{ `+jabatan+`  }} KSM IF"class="w-75"></div>
+                                <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.koor_wakoor[key].nama+` </div>
+                                <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+jabatan+`</div>
                                 <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.koor_wakoor[key].nrp+` </div>
                         </div>`);
                         });
                         $('#struktur').append('<div class="row">');
                         $.each(data.anggota, function(key,value){
+                            var jabatan = data.anggota[key].nama_jabatan+' '+data.anggota[key].divisi;
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-3 col-lg-3 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
-                                    <div><img src="{{ asset('assets/img/foto_anggota/`+data.anggota[key].foto_profil+`') }}" alt="{{ `+data.anggota[key].jabatans_id+` }}" class="w-75"></div>
-                                    <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.anggota[key].jabatans_id+` </div>
-                                    <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">`+data.anggota[key].nama+`</div>
+                                    <div><img src="{{ asset('assets/img/foto_anggota/`+data.anggota[key].foto_profil+`') }}" alt="{{ `+jabatan+` }}" class="w-75"></div>
+                                    <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.anggota[key].nama+` </div>
+                                    <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">`+jabatan+`</div>
                                     <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.anggota[key].nrp+` </div>
                                 </div>`)
                         });
