@@ -121,7 +121,7 @@ class StrukturController extends Controller
             ), 200);
         }
         else{
-            $koor_wakoor = DB::select(DB::raw("SELECT j.nama as jabatan, p.nrp, p.nama, p.foto_profil, d.nama AS divisi FROM (personals as p INNER JOIN jabatans as j on p.jabatans_id = j.id) INNER JOIN divisis as d on p.divisis_id = d.id WHERE p.divisis_id = '$id_divisi' and p.jabatans_id = 5 or p.jabatans_id = 6")); 
+            $koor_wakoor = DB::select(DB::raw("SELECT j.nama as jabatan, p.nrp, p.nama, p.foto_profil, d.nama AS divisi FROM (personals as p INNER JOIN jabatans as j on p.jabatans_id = j.id) INNER JOIN divisis as d on p.divisis_id = d.id WHERE p.divisis_id = '$id_divisi' and (p.jabatans_id = 5 or p.jabatans_id = 6)")); 
             $anggota = DB::table('personals')
             ->join('jabatans','personals.jabatans_id','=','jabatans.id')
             ->join('divisis','personals.divisis_id','=','divisis.id')

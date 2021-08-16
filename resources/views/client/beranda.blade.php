@@ -17,9 +17,9 @@
                         <div class="p-3 p-sm-3 p-md-4 pt-4 content-text">{{ $info->visi }}</div>
                     </div>
 
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 text-center mt-4 mt-sm-4 mt-md-5">
-                        <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda">Misi</div>
-                        <div class="p-3 p-sm-3 p-md-4 pt-4 content-text">{{ $info->misi }}</div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6  mt-4 mt-sm-4 mt-md-5">
+                        <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda text-center">Misi</div>
+                        <div class="p-3 p-sm-3 p-md-4 pt-4 content-text" ><?php echo $info->misi?></div>
                     </div>
                 </div>
             </div>
@@ -121,4 +121,5 @@
             $('#get-started').removeClass('d-none');
         });
     </script>
+
 @endsection

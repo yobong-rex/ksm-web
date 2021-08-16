@@ -32,7 +32,7 @@
                         <div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
                                 <div><img src="{{ asset('assets/img/foto_anggota/'.$p->foto_profil.'') }}" alt="{{ $p->nama_jabatan }} KSM IF"class="w-75"></div>
                                 <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">{{ $p->nama }}</div>
-                                <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ $p->nama_jabatan }} KSM IF</div>
+                                <div style="font-size: 120%;" class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ $p->nama_jabatan }} KSM IF</div>
                                 <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ $p->nrp }}</div>
                         </div>
                     @endforeach
@@ -99,7 +99,7 @@
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
                                 <div><img src="{{ asset('assets/img/foto_anggota/`+data.bph[key].foto_profil+`') }}" alt="{{ `+data.bph[key].nama_jabatan+` }} KSM IF"class="w-75"></div>
                                 <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">{{ `+data.bph[key].nama+` }}</div>
-                                <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ `+data.bph[key].nama_jabatan+` }} KSM IF</div>
+                                <div style="font-size: 120%;" class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ `+data.bph[key].nama_jabatan+` }} KSM IF</div>
                                 <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ `+data.bph[key].nrp+` }}</div>
                         </div>`)
                         })
@@ -111,7 +111,7 @@
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
                                 <div><img src="{{ asset('assets/img/foto_anggota/`+data.koor_wakoor[key].foto_profil+`') }}" alt="{{ `+jabatan+`  }} KSM IF"class="w-75"></div>
                                 <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.koor_wakoor[key].nama+` </div>
-                                <div class="h3 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+jabatan+`</div>
+                                <div style="font-size: 120%;" class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+jabatan+`</div>
                                 <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.koor_wakoor[key].nrp+` </div>
                         </div>`);
                         });
@@ -121,7 +121,7 @@
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-3 col-lg-3 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
                                     <div><img src="{{ asset('assets/img/foto_anggota/`+data.anggota[key].foto_profil+`') }}" alt="{{ `+jabatan+` }}" class="w-75"></div>
                                     <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.anggota[key].nama+` </div>
-                                    <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">`+jabatan+`</div>
+                                    <div style="font-size: 120%;" class="h4 text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">`+jabatan+`</div>
                                     <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.anggota[key].nrp+` </div>
                                 </div>`)
                         });
