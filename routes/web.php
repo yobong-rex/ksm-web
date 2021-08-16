@@ -55,7 +55,7 @@ Route::post('/admin/struktur/ambilAnggota','StrukturController@ambilAnggota')->n
 
 // Route untuk galeri
 Route::get('/admin/galeri','GaleriController@index')->name('admin-galeri');
-Route::get('/admin/galeri/{acara}','GaleriController@editGaleri')->name('edit-galeri');
+Route::get('/admin/galeri/{id}/{acara}','GaleriController@editGaleri')->name('edit-galeri');
 Route::post('/admin/galeri/update','GaleriController@updateGaleri')->name('update-galeri');
 
 

@@ -19,7 +19,7 @@
             <div class="row justify-content-center" id="daftar-galeri">
                 @foreach($galeri as $g)
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-0 p-3" style="height: 200px;">
-                        <a href="/admin/galeri/@php echo str_replace(' ', '-', strtolower($g->nama)); @endphp">
+                        <a href="/admin/galeri/{{ $g->id }}/@php echo str_replace(' ', '-', strtolower($g->nama)).'-'.$g->tahun; @endphp">
                             <div class="h-100 d-flex align-items-center justify-content-center h5 text-white text-center poppins-normal galeri-box" style="border-radius: 5px;">{{ $g->nama }} {{ $g->tahun }}</div>
                         </a>
                     </div>

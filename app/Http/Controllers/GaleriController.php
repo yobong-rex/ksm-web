@@ -13,19 +13,17 @@ class GaleriController extends Controller
         return view('admin.galeri', ['galeri' => $daftar_galeri]);
     }
 
-    public function editGaleri($acara) {
-        // pengecekan udah selesai apa belom
-
-        $acara = str_replace('-', ' ', $acara);
+    public function editGaleri($id, $acara) {
+        $acara = DB::table('acaras')->where('id', $id)->get();
+        // if (!$acara[0]->selesai) return redirect()->back();
 
         $galeri_detil = DB::table('acaras')
                 ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
-                ->where('nama', $acara)
-                ->select('acaras.id as id_acara', 'acaras.nama as nama_galeri', 'acaras.deskripsi_galeri as deskripsi_galeri', 'galeris.id as id_galeri', 'galeris.link_gambar as link')
+                ->where('acaras.id', $id)
+                ->select('acaras.id as id_acara', 'acaras.nama as nama_galeri', 'acaras.deskripsi_galeri as deskripsi_galeri', 'galeris.id as id_galeri', 'acaras.tahun as tahun', 'galeris.link_gambar as link')
                 ->get();
-        $nama_acara = DB::table('acaras')->where('nama', $acara)->get();
 
-        return view('admin.edit-galeri', ['detil_galeri' => $galeri_detil, 'acara' => $nama_acara[0] ]);
+        return view('admin.edit-galeri', ['detil_galeri' => $galeri_detil, 'acara' => $acara[0] ]);
     }
 
     public function updateGaleri(Request $request) {
@@ -42,7 +40,7 @@ class GaleriController extends Controller
     
             if ($get_image_delete != null) {
                 $acara = (DB::table('acaras')->where('id', $id_acara)->select('nama', 'tahun')->get())[0];
-                $nama_acara = str_replace(' ', '_', strtolower($acara->nama)); //add tahun disini
+                $nama_acara = str_replace(' ', '_', strtolower($acara->nama)).'_'.$acara->tahun;
                 
                 foreach ($get_image_delete as $image) File::delete(public_path('assets/img/galeri/'.$nama_acara.'/'.$image->link_gambar));
     
@@ -54,17 +52,20 @@ class GaleriController extends Controller
         if ($new_image != null) {
             $image_data = array();
             $acara = (DB::table('acaras')->where('id', $id_acara)->select('nama', 'tahun')->get())[0];
-            $nama_acara = str_replace(' ', '_', strtolower($acara->nama));  //add tahun disini
+            $nama_acara = str_replace(' ', '_', strtolower($acara->nama)).'_'.$acara->tahun;
             $latest_image_id = DB::table('galeris')->where('acaras_id', $id_acara)->select('id')->orderBy('id', 'desc')->limit(1)->get();
+            $latest_image_id = (count($latest_image_id) > 0) ? $latest_image_id[0]->id : 0;
 
-            if ($latest_image_id == null) $latest_image_id[0]->id = 0;
+            // Buat folder baru jika folder belum ada
+            $path = public_path().'/assets/img/galeri/'.$nama_acara;
+            File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
             
             foreach($new_image as $image) {
                 $imgFolder = 'assets/img/galeri/'.$nama_acara.'/';
-                $imgFile = (++$latest_image_id[0]->id).'.'.$image->extension();
+                $imgFile = (++$latest_image_id).'.'.$image->extension();
                 $image->move($imgFolder, $imgFile);
     
-                $temp = ['acaras_id' => $id_acara, 'id' => $latest_image_id[0]->id, 'link_gambar' => $imgFile];
+                $temp = ['acaras_id' => $id_acara, 'id' => $latest_image_id, 'link_gambar' => $imgFile];
                 $image_data[] = $temp;
             }
 

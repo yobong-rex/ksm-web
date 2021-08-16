@@ -74,7 +74,7 @@
                             @if ($detil_galeri != null && count($detil_galeri) > 0) 
                                 @foreach($detil_galeri as $g)
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 p-3 img-gallery">
-                                        <img class="rounded-0 img-image w-100" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama_galeri)).'/'.$g->link.'') }}" alt="event-ksm">
+                                        <img class="rounded-0 img-image w-100" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama_galeri)).'_'.$g->tahun.'/'.$g->link.'') }}" alt="event-ksm">
                                         <div style="position: absolute; top: 0px; right: 0px">
                                             <button type="button" href="#" class="btn btn-danger btn-delete-image" value="{{ $g->id_galeri }}"><span class="h6 font-weight-bold">Delete</span></button>
                                             <input type="hidden" name="deleteImage[]" value="">
