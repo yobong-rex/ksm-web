@@ -9,13 +9,13 @@ use File;
 class GaleriController extends Controller
 {
     public function index() {
-        $daftar_galeri = DB::table('acaras')->get(); //->where('selesai', true)
+        $daftar_galeri = DB::table('acaras')->where('selesai', true)->get();
         return view('admin.galeri', ['galeri' => $daftar_galeri]);
     }
 
     public function editGaleri($id, $acara) {
         $acara = DB::table('acaras')->where('id', $id)->get();
-        // if (!$acara[0]->selesai) return redirect()->back();
+        if (!$acara[0]->selesai) return redirect()->back();
 
         $galeri_detil = DB::table('acaras')
                 ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')

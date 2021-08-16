@@ -101,9 +101,9 @@
 
                     @foreach($galeri as $g)
                         <div class="col-10 col-sm-10 col-md-5 col-lg-5 col-xl-4 p-0 bg-dark img-gallery">
-                            <a href="{{ route('galeri') }}">
-                                <img class="rounded-0 img-image" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama)).'/'.$g->thumbnail.'') }}" alt="event-ksm">
-                                <div class="h3 text-white text-image font-weight-bold text-center">{{ $g->nama }}</div>
+                            <a href="/galeri/@php echo str_replace(' ', '-', strtolower($g->nama)).'-'.$g->tahun; @endphp">
+                                <img class="rounded-0 img-image" src="{{ asset('assets/img/galeri/'.str_replace(' ', '_', strtolower($g->nama)).'_'.$g->tahun.'/'.$g->thumbnail.'') }}" alt="event-ksm">
+                                <div class="h3 text-white text-image font-weight-bold text-center">{{ $g->nama }} {{ $g->tahun }}</div>
                             </a>
                         </div>
                     @endforeach

@@ -12,11 +12,11 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 text-center mt-4 mt-sm-4 mt-md-5">
                         <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda">Link Soal</div>
-                        <a href="{{ $bursa->link_soal }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px">Soal</a>
+                        <a href="{{ $bursa->link_soal }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px" target="_blank">Soal</a>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 text-center mt-4 mt-sm-4 mt-md-5">
                         <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda">Link Kuisioner</div>
-                        <a href="{{ $bursa->link_kuisioner }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px">Kuisioner</a>
+                        <a href="{{ $bursa->link_kuisioner }}" class="btn btn-primary font-weight-bold mt-3 h1 p-3 pl-5 pr-5" style="font-size: 18px" target="_blank">Kuisioner</a>
                     </div>
                 </div>
             </div>

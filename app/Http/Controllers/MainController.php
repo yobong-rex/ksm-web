@@ -24,8 +24,8 @@ class MainController extends Controller
 
         $daftar_galeri = DB::table('acaras')
                     ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
-                    ->groupBy('acaras.id', 'acaras.nama')
-                    ->select('acaras.id', 'acaras.nama')
+                    ->groupBy('acaras.id', 'acaras.nama', 'acaras.tahun')
+                    ->select('acaras.id', 'acaras.nama', 'acaras.tahun')
                     ->where('selesai', true) // [BUKA COMMENT INI]
                     ->limit(6)
                     ->get();
@@ -73,7 +73,7 @@ class MainController extends Controller
     }
 
     // Load halaman galeri
-    function galeri() {
+    function galeri($nama_acara) { // $nama_acara
         $info_ksm = DB::table('info_ksms')->get();
         return view('client.galeri',['info' => $info_ksm[0]]);
     }
@@ -104,8 +104,8 @@ class MainController extends Controller
         $info_ksm = DB::table('info_ksms')->get();
         $daftar_galeri = DB::table('acaras')
                     ->join('galeris', 'acaras.id', '=', 'galeris.acaras_id')
-                    ->groupBy('acaras.id', 'acaras.nama')
-                    ->select('acaras.id', 'acaras.nama')
+                    ->groupBy('acaras.id', 'acaras.nama', 'acaras.tahun')
+                    ->select('acaras.id', 'acaras.nama', 'acaras.tahun')
                     ->where('selesai', true) // [BUKA COMMENT INI]
                     ->limit(9)
                     ->get();

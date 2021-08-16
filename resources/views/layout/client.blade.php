@@ -19,6 +19,9 @@
         <!-- Font Resources -->
         <link rel="stylesheet" href="{{ asset('assets/css/nucleo-icons.css') }}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- Icon Website -->
+        <link rel="shortcut icon" href="{{ asset('assets/img/ksm-putih-min.png') }}" type="image/x-icon">
     </head>
 
     <body>
@@ -81,7 +84,7 @@
                                 <a class="nav-link" href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
+                                <a class="nav-link" href="{{ route('all-galeri') }}">Galeri</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('lsta-bursa') }}">LSTA & BURSA</a>
