@@ -75,7 +75,16 @@ class MainController extends Controller
     // Load halaman galeri
     function galeri($nama_acara) { // $nama_acara
         $info_ksm = DB::table('info_ksms')->get();
-        return view('client.galeri',['info' => $info_ksm[0]]);
+        $acara_split = explode('-',$nama_acara);
+        $tahun = array_pop($acara_split);
+        $acara = implode(' ', $acara_split);
+        $id_galeri_acara = DB::table('acaras')
+                    ->where('nama','like','%'.$acara.'%')
+                    ->where('tahun',$tahun)
+                    ->select('id','deskripsi_galeri','tanggal_acara')
+                    ->get();
+        $foto= DB::table('galeris')->where('acaras_id',$id_galeri_acara[0]->id)->select('link_gambar')->get();
+        return view('client.galeri',['info' => $info_ksm[0], 'foto'=>$foto, 'deskripsi'=>$id_galeri_acara,'acara'=>$nama_acara]);
     }
 
     // Load halaman lsta & bursa
