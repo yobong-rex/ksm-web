@@ -83,7 +83,9 @@
                             </div>
                         @endforeach
                     @else
-                        <div class='display-3 mb-5 header-beranda'>Maaf saat ini tidak ada acara</div>
+                    <div class="col-12 text-center">
+                        <div class='display-3 mb-5 header-beranda'>Mohon maaf saat ini tidak ada acara yang sedang berjalan. Terima kasih.</div>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -120,6 +122,8 @@
         $(document).ready(function() {
             $('#get-started').removeClass('d-none');
         });
+
+        
     </script>
 
 @endsection

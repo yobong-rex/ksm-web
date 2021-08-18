@@ -106,13 +106,13 @@ class StrukturController extends Controller
 
     function ambilClient(Request $request){
         $id_divisi = $request->get('id_divisi');
-        // $id_divisi = 4;
+        //  $id_divisi = 1;
         if($id_divisi==1){
             $bph = DB::table('personals')
                     ->join('jabatans','personals.jabatans_id','=','jabatans.id')
                     ->join('divisis','personals.divisis_id','=','divisis.id')
-                    ->where('divisis_id', '1')
-                    ->orderBy('jabatans_id', 'asc')
+                    ->where('personals.divisis_id', '1')
+                    ->orderBy('personals.jabatans_id', 'asc')
                     ->select('personals.nama as nama', 'personals.foto_profil as foto_profil', 'jabatans.nama as nama_jabatan','personals.nrp as nrp', 'divisis.nama as divisi')
                     ->get();
             return response()->json(array(

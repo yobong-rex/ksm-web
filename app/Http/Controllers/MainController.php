@@ -27,6 +27,7 @@ class MainController extends Controller
                     ->groupBy('acaras.id', 'acaras.nama', 'acaras.tahun')
                     ->select('acaras.id', 'acaras.nama', 'acaras.tahun')
                     ->where('selesai', true) // [BUKA COMMENT INI]
+                    ->orderBy('acaras.id', 'desc')
                     ->limit(6)
                     ->get();
 
@@ -116,8 +117,8 @@ class MainController extends Controller
                     ->groupBy('acaras.id', 'acaras.nama', 'acaras.tahun')
                     ->select('acaras.id', 'acaras.nama', 'acaras.tahun')
                     ->where('selesai', true) // [BUKA COMMENT INI]
-                    ->limit(9)
-                    ->get();
+                    ->orderBy('acaras.id', 'desc')
+                    ->paginate(9);
         foreach ($daftar_galeri as $key => $value) {
             $get_thumbnail = DB::table('galeris')->where('acaras_id', $value->id)->orderBy('id', 'asc')->select('link_gambar')->get();
             $daftar_galeri[$key]->thumbnail = $get_thumbnail[0]->link_gambar;
@@ -125,6 +126,6 @@ class MainController extends Controller
         return view('client.all-galery', [
             'info' => $info_ksm[0],
             'galeri'=>$daftar_galeri
-        ]);
+        ]); 
     }
 }

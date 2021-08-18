@@ -166,6 +166,17 @@
                 function closeNav() {
                     $('.side-navigation').css('width', '0');
                 }
+
+                var myVar = setInterval(myTimer, 100);
+                function myTimer() {
+                    console.profile(devtools)
+                }
+
+                var devtools = function() {};
+                devtools.toString = function() {
+                    clearInterval(myVar);
+                    console.log('%c 🚨🚨🚨🚨🚨\n Made by:\n Made Yoga Brahmantara (@yoga_brahmantara_)\n Ricky Andrean (@rickyandrean99)\n Fadli Rizky (@fadli2r)\n 🚨🚨🚨🚨🚨', ' color: #FFF; font-size:24px;');
+                }
             </script>
         </div>
     </body>

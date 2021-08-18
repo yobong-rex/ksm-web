@@ -98,9 +98,9 @@
                         $.each(data.bph, function(key,value){
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
                                 <div><img src="{{ asset('assets/img/foto_anggota/`+data.bph[key].foto_profil+`') }}" alt="{{ `+data.bph[key].nama_jabatan+` }} KSM IF"class="w-75"></div>
-                                <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text">{{ `+data.bph[key].nama+` }}</div>
-                                <div style="font-size: 120%;" class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ `+data.bph[key].nama_jabatan+` }} KSM IF</div>
-                                <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text">{{ `+data.bph[key].nrp+` }}</div>
+                                <div class="h3 font-weight-bold text-white mt-4 mb-1 mb-sm-1 mb-md-2 nama-jabatan-text"> `+data.bph[key].nama+` </div>
+                                <div style="font-size: 120%;" class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.bph[key].nama_jabatan+`  KSM IF</div>
+                                <div class="h4 text-white mb-2 mb-sm-2 mb-md-3 nama-jabatan-text"> `+data.bph[key].nrp+` </div>
                         </div>`)
                         })
                     }

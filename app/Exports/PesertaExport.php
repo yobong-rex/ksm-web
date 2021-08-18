@@ -15,8 +15,6 @@ class PesertaExport implements FromQuery, WithHeadings
     public function headings(): array
     {
         return [
-            'No',
-            'acara',
             'Nama',
             'NRP',
             'Email',
@@ -33,6 +31,6 @@ class PesertaExport implements FromQuery, WithHeadings
 
     public function query()
     {
-        return Peserta::query()->where('acaras_id', $this->acaras_id);
+        return Peserta::query()->where('acaras_id', $this->acaras_id)->select('nama','nrp','email','jurusan','no_hp','waktu');
     }
 }
