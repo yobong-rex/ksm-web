@@ -17,8 +17,14 @@
                         </a>
                     </div>
                 @endforeach
-
+                
             </div>
+            <br>
+            <div class="col-12 d-flex justify-content-center">
+                {{ $galeri->links() }}
+            </div>  
         </div>
     </div>
+
+
 @endsection

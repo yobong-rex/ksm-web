@@ -105,7 +105,7 @@
                         })
                     }
                     else if(data.msg=="selain bph"){
-                        $('#divisi').html(data.koor_wakoor[0].divisi);
+                        $('#divisi').html(`Divisi ` + data.koor_wakoor[0].divisi);
                         $.each(data.koor_wakoor, function(key,value){
                             var jabatan = data.koor_wakoor[key].jabatan+' '+data.koor_wakoor[key].divisi;
                             $('#struktur').append(`<div class="col-6 col-sm-6 col-md-6 col-lg-6 text-center mt-4 mt-sm-4 mt-md-5 mb-3">
