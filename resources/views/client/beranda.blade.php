@@ -63,7 +63,7 @@
                         @foreach ($acara as $a)
                             <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-4 acara-card p-3">
                                 <div class="card w-100 h-100 m-0">
-                                    <img class="card-img-top" src="{{ asset('assets/img/event/'.$a->link_gambar.'') }}" alt="{{ str_replace(' ', '-', strtolower($a->nama)) }}">
+                                    <img class="card-img-top" src="{{ asset('assets/img/poster_acara/'.$a->link_gambar.'') }}" alt="{{ str_replace(' ', '-', strtolower($a->nama)) }}">
                                     <div class="card-body p-4">
                                         <div class="card-title mb-3 mt-2 h3 font-weight-bold event-header">{{ $a->nama }}</div>
                                         <p class="card-text h4 event-text">{{ $a->deskripsi }}</p>

@@ -8,6 +8,8 @@ use Response;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Exports\PesertaExport;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class AcaraController extends Controller
 {
@@ -21,12 +23,12 @@ class AcaraController extends Controller
         $tanggal_mulai = $request->get('tanggal-mulai');
         $tanggal_selesai = $request->get('tanggal-selesai');
         $tipe = $request->get('tipe');
-        $poster = $request->get('poster');
         $deskripsi = $request->get('deskripsi');
         $link_grup = $request->get('link_grup');
         $waktu_awal = $request->get('waktu_awal');
         $waktu_akhir = $request->get('waktu_akhir');
         $tahun = $request->get('tahun-acara');
+        $nama_file='';
 
         if ($waktu_awal == $waktu_akhir) {
             $waktu = date('j F Y', strtotime($waktu_awal));
@@ -43,7 +45,15 @@ class AcaraController extends Controller
             }
         }
 
-        $insert = DB::table('acaras')->insert(['nama'=>$nama, 'tanggal_mulai'=>$tanggal_mulai, 'tanggal_akhir'=>$tanggal_selesai, 'eksternal'=>$tipe, 'link_gambar'=>$poster, 'deskripsi'=>$deskripsi, 'link_grup'=>$link_grup, 'tanggal_acara'=>$waktu, 'tahun'=>$tahun]);
+        if($request->hasFile('foto-poster')){
+            $foto = $request->file("foto-poster");
+
+            $ext =$foto->getClientOriginalExtension();
+            $nama_file = 'poster_'.$nama.'_'.$tahun.'.'.$ext;
+            $foto->move('assets/img/poster_acara',$nama_file);
+        }
+
+        $insert = DB::table('acaras')->insert(['nama'=>$nama, 'tanggal_mulai'=>$tanggal_mulai, 'tanggal_akhir'=>$tanggal_selesai, 'eksternal'=>$tipe, 'link_gambar'=>$nama_file, 'deskripsi'=>$deskripsi, 'link_grup'=>$link_grup, 'tanggal_acara'=>$waktu, 'tahun'=>$tahun]);
             
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Ditambah');
     }
@@ -91,13 +101,12 @@ class AcaraController extends Controller
         $tipe = $request->get('tipe');
         $pendaftaran = $request->get('pendaftaran');
         $selesai = $request->get('selesai');
-        $poster = $request->get('poster');
         $deskripsi = $request->get('deskripsi');
         $link_grup = $request->get('link_grup');
-        $deskripsi_galeri = $request->get('deskripsi_galeri');
         $waktu_awal = $request->get('waktu_awal');
         $waktu_akhir = $request->get('waktu_akhir');
         $tahun = $request->get('tahun-acara');
+        $nama_file='';
 
         if($waktu_awal == $waktu_akhir){
             $waktu = date('j F Y', strtotime($waktu_awal));
@@ -114,6 +123,15 @@ class AcaraController extends Controller
             }
         }
 
+        if($request->hasFile('foto-poster')){
+            $foto = $request->file("foto-poster");
+            $ext =$foto->getClientOriginalExtension();
+            $nama_file = 'poster_'.$nama.'_'.$tahun.'.'.$ext;
+            File::delete(public_path('assets/img/poster_acara/'.$nama_file));
+            $foto->move('assets/img/poster_acara/',$nama_file);
+            $update = DB::table('acaras')->where('id',$id_acara)->update(['link_gambar'=>$nama_file]);
+        }
+
         $update = DB::table('acaras')->where('id',$id_acara)->update([
             'nama'=>$nama,
             'daftar'=>$pendaftaran,
@@ -122,9 +140,7 @@ class AcaraController extends Controller
             'tanggal_mulai'=>$tanggal_mulai,
             'tanggal_akhir'=>$tanggal_selesai,
             'link_grup'=>$link_grup,
-            'link_gambar'=>$poster,
             'deskripsi'=>$deskripsi,
-            'deskripsi_galeri'=>$deskripsi_galeri,
             'tanggal_acara'=>$waktu,
             'tahun'=>$tahun
         ]);

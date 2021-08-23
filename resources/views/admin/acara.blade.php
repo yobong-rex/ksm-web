@@ -83,7 +83,7 @@
     <div class="modal fade" id="modaltambahrd" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form role="form" method='POST' action="/admin/acara/tambah">
+                <form role="form" method='POST' action="/admin/acara/tambah" enctype="multipart/form-data">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Tambah Acara</h4>
@@ -126,10 +126,10 @@
                                 <input type="text" class="form-control" id="" name="tahun-acara" placeholder="Masukan tahun saja, contoh: 2020" required>
                             </div>
                             
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Link Poster</label>
                                 <input type="text" class="form-control" id="" name="poster">
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label>Link Grup WA</label>
                                 <input type="text" class="form-control" id="" name="link_grup">
@@ -138,9 +138,11 @@
                                 <label>Deskripsi</label> <br>
                                 <textarea rows="4" cols="50" name="deskripsi" required> </textarea>
                             </div>
-                            
+                            <div class="form-group">
+                                <label>Poster Acara</label>
+                                <input type="file" name="foto-poster" accept="image/png, image/gif, image/jpeg">
+                            </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-info">Submit</button>
@@ -155,7 +157,7 @@
     <div class="modal fade" id="modaledit" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form role="form" method='POST' action="/admin/acara/edit">
+                <form role="form" method='POST' action="/admin/acara/edit" enctype="multipart/form-data">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title">Tambah Acara</h4>
@@ -221,8 +223,8 @@
                                 <textarea rows="4" cols="50" name="deskripsi" id='deskripsi' required> </textarea>
                             </div>
                             <div class="form-group">
-                                <label>Galeri</label>
-                                <textarea rows="4" cols="50" name="deskripsi_galeri" id="galeri" > </textarea>
+                                <label>Poster Acara</label>
+                                <input type="file" name="foto-poster" accept="image/png, image/gif, image/jpeg">
                             </div>
                         </div>
 
@@ -303,8 +305,7 @@
                         }
                         $('#poster').val(data.list[key].link_gambar);
                         $('#link_grup').val(data.list[key].link_grup);
-                        $('#deskripsi').val(data.list[key].deskripsi)
-                        $('#galeri').val(data.list[key].deskripsi_galeri);
+                        $('#deskripsi').val(data.list[key].deskripsi);
                     });
 				}
 			});

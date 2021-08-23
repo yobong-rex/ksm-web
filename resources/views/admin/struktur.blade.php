@@ -144,13 +144,12 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-body">
-
                             <div class="form-group">
                                 <label>NRP</label>
                                 <input type="text" class="form-control" id="nrp_edit" name="" disabled>
                                 <input type="hidden" name="nrp" id="nrp_hidden">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label>Nama</label>
                                 <input type="text" class="form-control" id="nama_edit" name="nama" required>
                             </div>
@@ -163,9 +162,8 @@
                                 <label>Divisi</label>
                                 <select name="divisi" id="divisi-edit" class="slt-divisi" >
                                     <option value="" selected disabled>-- Pilih Divisi --</option>
-                                    @foreach($divisi as $d){
+                                    @foreach($divisi as $d)
                                         <option id="{{$d->nama}}" value="{{$d->id}}" >{{$d->nama}}</option>
-                                    }
                                     @endforeach
                                 </select>
                             </div>
