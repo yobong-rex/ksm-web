@@ -5,6 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Template Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/asset_admin/css/font-awesome.min.css') }}">

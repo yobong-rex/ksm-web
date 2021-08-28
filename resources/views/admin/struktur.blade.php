@@ -314,3 +314,9 @@
         
     </script>
 @endsection
+
+@section('javascript')
+    <script>
+        $('#nav-struktur').addClass('active');
+    </script>
+@endsection

@@ -60,7 +60,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/admin/galeri/update','GaleriController@updateGaleri')->name('update-galeri');
 
     // Route untuk admin info ksm
-    Route::get('/admin/info-ksm','AdminController@index')->name('admin-info-ksm');
+    Route::get('/admin/info-ksm','AdminController@info')->name('admin-info-ksm');
+    Route::post('/admin/update-info-ksm','AdminController@updateInfo')->name('update-info-ksm');
 
     // Route untuk admin bursa soal
     Route::get('/admin/bursa-soal','BursaController@index')->name('admin-bursa-soal');

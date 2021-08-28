@@ -27,6 +27,11 @@ table.table > thead > tr > th, table.table > tbody > tr > td {
         max-width: 25% !important;
     }
 
+    .box-wrapper-bursa {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+
     .box-table-wrapper {
         flex: 0 0 66% !important;
         max-width: 66% !important;

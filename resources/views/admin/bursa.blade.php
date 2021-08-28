@@ -30,3 +30,9 @@
         </div>
     </div>
 @endsection
+
+@section('javascript')
+    <script>
+        $('#nav-bursa').addClass('active');
+    </script>
+@endsection

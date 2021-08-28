@@ -100,3 +100,9 @@
         });
     </script>
 @endsection
+
+@section('javascript')
+    <script>
+        $('#nav-peserta').addClass('active');
+    </script>
+@endsection

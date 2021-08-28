@@ -321,3 +321,9 @@
 
     </script>
 @endsection
+
+@section('javascript')
+    <script>
+        $('#nav-acara').addClass('active');
+    </script>
+@endsection
