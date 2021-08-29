@@ -14,7 +14,7 @@ use File;
 class AcaraController extends Controller
 {
     public function index() {
-        $data = DB::table('acaras')->get();
+        $data = DB::table('acaras')->orderBy('id', 'desc')->get();
         return view('admin.acara', ['acara'=>$data]);
     }
 
@@ -28,6 +28,8 @@ class AcaraController extends Controller
         $waktu_awal = $request->get('waktu_awal');
         $waktu_akhir = $request->get('waktu_akhir');
         $tahun = $request->get('tahun-acara');
+        $nomer_wa = $request->get('nomer_wa');
+        $nama_cp = $request->get('nama_cp');
         $nama_file='';
 
         if ($waktu_awal == $waktu_akhir) {
@@ -53,7 +55,7 @@ class AcaraController extends Controller
             $foto->move('assets/img/poster_acara',$nama_file);
         }
 
-        $insert = DB::table('acaras')->insert(['nama'=>$nama, 'tanggal_mulai'=>$tanggal_mulai, 'tanggal_akhir'=>$tanggal_selesai, 'eksternal'=>$tipe, 'link_gambar'=>$nama_file, 'deskripsi'=>$deskripsi, 'link_grup'=>$link_grup, 'tanggal_acara'=>$waktu, 'tahun'=>$tahun]);
+        $insert = DB::table('acaras')->insert(['nama'=>$nama, 'tanggal_mulai'=>$tanggal_mulai, 'tanggal_akhir'=>$tanggal_selesai, 'eksternal'=>$tipe, 'link_gambar'=>$nama_file, 'deskripsi'=>$deskripsi, 'link_grup'=>$link_grup, 'tanggal_acara'=>$waktu, 'tahun'=>$tahun,'nomer_cp'=>$nomer_wa,'nama_cp'=>$nama_cp]);
             
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Ditambah');
     }
@@ -106,6 +108,8 @@ class AcaraController extends Controller
         $waktu_awal = $request->get('waktu_awal');
         $waktu_akhir = $request->get('waktu_akhir');
         $tahun = $request->get('tahun-acara');
+        $nomer_wa = $request->get('nomer_wa');
+        $nama_cp = $request->get('nama_cp');
         $nama_file='';
 
         if($waktu_awal == $waktu_akhir){
@@ -142,7 +146,9 @@ class AcaraController extends Controller
             'link_grup'=>$link_grup,
             'deskripsi'=>$deskripsi,
             'tanggal_acara'=>$waktu,
-            'tahun'=>$tahun
+            'tahun'=>$tahun,
+            'nomer_cp'=>$nomer_wa,
+            'nama_cp'=>$nama_cp
         ]);
         
         return redirect()->route('admin-acara')->with('status','Acara Berhasil Diubah');

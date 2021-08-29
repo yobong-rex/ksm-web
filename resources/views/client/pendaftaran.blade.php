@@ -7,7 +7,7 @@
     <div class="introduction-wrapper mt-3 mt-sm-3 mt-md-4 pt-5 pb-3 pb-sm-3 pb-md-5 h4 text-white">
             <div class="row mt-4">
                 <div class="col-12 ">
-                    <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda text-center">Pendaftaran {{$data[0]->nama}}</div>
+                    <div class="display-3 mb-2 mb-sm-2 mb-md-3 header-beranda text-center">Pendaftaran {{$data[0]->nama}} {{$data[0]->tahun}}</div>
                     <input type="hidden" id="id_acara" value="{{$data[0]->id}}">
                     <form action="">
                     <div class="mb-3">

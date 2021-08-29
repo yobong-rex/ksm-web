@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;;
 
 class MainController extends Controller
 {
@@ -78,7 +79,7 @@ class MainController extends Controller
         $info_ksm = DB::table('info_ksms')->get();
         $acara_split = explode('-',$nama_acara);
         $tahun = array_pop($acara_split);
-        $acara = implode(' ', $acara_split);
+        $acara = implode(' ', $acara_split);    
         $id_galeri_acara = DB::table('acaras')
                     ->where('nama','like','%'.$acara.'%')
                     ->where('tahun',$tahun)
@@ -101,13 +102,24 @@ class MainController extends Controller
 
     //load halaman pendaftaran
     function pendaftaran($nama_acara){
-        $acara = "%".str_replace('-', ' ', strtolower($nama_acara))."%"; 
+        $acara_split = explode('-',$nama_acara);
+        $tahun = array_pop($acara_split);
+        $acara = implode(' ', $acara_split);
         $info_ksm = DB::table('info_ksms')->get();
-        $data = DB::table('acaras')->where('nama','like',$acara)->get();
-        return view('client.pendaftaran', [
-            'info' => $info_ksm[0],
-            'data' => $data
-        ]);
+        $data = DB::table('acaras')->where('nama','like','%'.$acara.'%')->where('tahun',$tahun)->get();
+        $now =  Carbon::now();
+        if ($data[0]->tanggal_mulai > $now || $data[0]->tanggal_akhir < $now || $data[0]->selesai == 1){
+            return view('client.tutup',[
+                'info' => $info_ksm[0]
+            ]);
+        }
+        else{
+            return view('client.pendaftaran', [
+                'info' => $info_ksm[0],
+                'data' => $data
+            ]);
+        }
+        
     }
 
     function allGaleri(){

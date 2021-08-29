@@ -65,7 +65,10 @@
                                                     <td>{{$pendaftaran}}</td>
                                                     <td>{{$status}}</td>
                                                     <td>{{$a->deskripsi}}</td>
-                                                    <td><button type="button" value="{{$a->id}}" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button> <button type="button" value="{{$a->id}}" class="btn-delete" id_acara="{{$a->id}}" nama_acara="{{$a->nama}}" data-toggle="modal" data-target="#modalHapus">Hapus</button><a href="/admin/acara/excel/{{$a->id}}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a></td>
+                                                    <td><button type="button" value="{{$a->id}}" class=" btn btn-primery" onclick="ubah('{{$a->id}}')" data-toggle="modal" data-target="#modaledit">Ubah</button>&nbsp;
+                                                    <button type="button" value="{{$a->id}}" class="btn-delete btn btn-primery" id_acara="{{$a->id}}" nama_acara="{{$a->nama}}" data-toggle="modal" data-target="#modalHapus">Hapus</button>&nbsp;
+                                                    <a href="/admin/acara/excel/{{$a->id}}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>&nbsp;
+                                                    <button type="button" data-toggle="modal" data-target="#modal-photo" nama="{{$a->nama}}" value="{{ asset('assets/img/poster_acara/'.$a->link_gambar.'') }}" class='btn btn-primery modal-foto'> Poster</button></td>
                                                 </tr>
                                                 @php($nomer++);
                                             @endforeach
@@ -133,6 +136,14 @@
                             <div class="form-group">
                                 <label>Link Grup WA</label>
                                 <input type="text" class="form-control" id="" name="link_grup">
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Contact Person</label>
+                                <input type="text" class="form-control" id="" name="nama_cp">
+                            </div>
+                            <div class="form-group">
+                                <label>Nomer WA Contact person</label>
+                                <input type="text" class="form-control" id="" name="nomer_wa">
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label> <br>
@@ -219,6 +230,14 @@
                                 <input type="text" class="form-control" id="link_grup" name="link_grup">
                             </div>
                             <div class="form-group">
+                                <label>Nama Contact Person</label>
+                                <input type="text" class="form-control" id="nama_cp" name="nama_cp">
+                            </div>
+                            <div class="form-group">
+                                <label>Nomer WA Contact person</label>
+                                <input type="text" class="form-control" id="nomer_wa" name="nomer_wa">
+                            </div>
+                            <div class="form-group">
                                 <label>Deskripsi</label> <br>
                                 <textarea rows="4" cols="50" name="deskripsi" id='deskripsi' required> </textarea>
                             </div>
@@ -264,6 +283,28 @@
         </div>
     </div>
 
+    <!-- begin:: modal poster -->
+    <div class="modal fade" id="modal-photo" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" id="modal-foto-tilte"></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-body">
+                             <img src="" alt="" id="poster-modal">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function ubah(id){
@@ -285,6 +326,8 @@
                         $('#waktu_awal').val(data.tanggal_awal);
                         $('#waktu_akhir').val(data.tanggal_akhir);
                         $('#tahun-acara').val(data.list[key].tahun);
+                        $('#nomer_wa').val(data.list[key].nomer_cp);
+                        $('#nama_cp').val(data.list[key].nama_cp);
                         if(data.list[key].eksternal == 0){
                             $('#internal').prop("checked", true);
                         }
@@ -317,6 +360,12 @@
             $('#acara_delete').html(nama_acara);
             $('#id_acara_delete').val(id_acara);
             $('#nama_acara_delete').val(nama_acara);
+        });
+        $(document).on('click', '.modal-foto', function(){
+            var foto = $(this).val();
+            var nama = $(this).attr('nama');
+            $('#modal-foto-tilte').html(nama);
+            $('#poster-modal').attr('src',foto);
         });
 
     </script>
