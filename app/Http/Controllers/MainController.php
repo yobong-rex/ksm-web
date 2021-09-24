@@ -20,7 +20,7 @@ class MainController extends Controller
         $daftar_acara = DB::table('acaras')
                     ->where('eksternal', true)
                     ->where('selesai', false)
-                    ->select('nama', 'daftar', 'tanggal_acara', 'link_gambar', 'deskripsi')
+                    ->select('nama', 'daftar','tahun', 'tanggal_acara', 'link_gambar', 'deskripsi')
                     ->get();
 
         $daftar_galeri = DB::table('acaras')
@@ -68,10 +68,17 @@ class MainController extends Controller
 
     // Load halaman acara
     function acara($nama_acara) {
+        $acara_split = explode('-',$nama_acara);
+        $tahun = array_pop($acara_split);
+        $acara = implode(' ', $acara_split);
         $info_ksm = DB::table('info_ksms')->get();
-        $acara = "%".str_replace('-', ' ', strtolower($nama_acara))."%"; 
-        $data = DB::table('acaras')->where('nama','like',$acara)->get();
-        return view('client.acara',['info' => $info_ksm[0],'acara'=>$data]);
+        $data = DB::table('acaras')->where('nama','like','%'.$acara.'%')->where('tahun',$tahun)->where('selesai', false)->get();
+        $now =  Carbon::now();
+        $status= true;
+        if ($data[0]->tanggal_mulai > $now || $data[0]->tanggal_akhir < $now || $data[0]->daftar == 0){
+         $status = false;   
+        }
+        return view('client.acara',['info' => $info_ksm[0],'acara'=>$data,'status'=>$status]);
     }
 
     // Load halaman galeri
@@ -106,9 +113,9 @@ class MainController extends Controller
         $tahun = array_pop($acara_split);
         $acara = implode(' ', $acara_split);
         $info_ksm = DB::table('info_ksms')->get();
-        $data = DB::table('acaras')->where('nama','like','%'.$acara.'%')->where('tahun',$tahun)->get();
+        $data = DB::table('acaras')->where('nama','like','%'.$acara.'%')->where('tahun',$tahun)->where('selesai',0)->get();
         $now =  Carbon::now();
-        if ($data[0]->tanggal_mulai > $now || $data[0]->tanggal_akhir < $now || $data[0]->selesai == 1){
+        if ($data[0]->tanggal_mulai > $now || $data[0]->tanggal_akhir < $now || $data[0]->daftar == 0){
             return view('client.tutup',[
                 'info' => $info_ksm[0]
             ]);

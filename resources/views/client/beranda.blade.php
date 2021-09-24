@@ -74,7 +74,7 @@
                                         </div>
 
                                         @if ($a->daftar)
-                                            <a href="/acara/{{ str_replace(' ', '-', strtolower($a->nama)) }}" class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
+                                            <a href="/acara/@php echo str_replace(' ', '-', strtolower($a->nama)).'-'.$a->tahun; @endphp" class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
                                         @else
                                             <a class="btn btn-primary font-weight-bold btn-daftar ml-4 mb-3">Read More</a>
                                         @endif
